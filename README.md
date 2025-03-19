@@ -1,6 +1,3 @@
-Here's a professional README.md for your Exercism Python solutions repository:
-
-```markdown
 # Exercism Python Track Solutions
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-square&logo=python&logoColor=ffdd54)
@@ -63,4 +60,3 @@ While these are personal solutions, suggestions for improvements are welcome thr
 
 ## Acknowledgements
 Problems sourced from [Exercism's Python Track](https://exercism.org/tracks/python) under CC BY-NC-SA 4.0 license.
-```
