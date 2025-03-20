@@ -5,10 +5,10 @@ from functools import reduce
 
 
 OPERATIONS = {
-    "plus": lambda left, right: left + right,
-    "minus": lambda left, right: left - right,
-    "multiplied_by": lambda left, right: left * right,
-    "divided_by": lambda left, right: left / right
+    "plus": lambda x, y: x + y,
+    "minus": lambda x, y: x - y,
+    "multiplied_by": lambda x, y: x * y,
+    "divided_by": lambda x, y: x // y
 }
 
 
@@ -75,8 +75,12 @@ def calculate_result(tokens: list[str]) -> int:
     return: result of the calculation
     """
     result = int(tokens[0])
-    for index in range(1, len(tokens), 2):
-        result = OPERATIONS[tokens[index]](result, int(tokens[index + 1]))
+    numbers = [int(token) for token in tokens[2::2]]
+    operations = [OPERATIONS[tokens[i]] for i in range(1, len(tokens), 2)]
+
+    for op, num in zip(operations, numbers):
+        result = op(result, num)
+        
     return result
 
 
