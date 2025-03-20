@@ -17,6 +17,7 @@ This repository contains my personal solutions to exercises from [Exercism](http
 - ISBN Verifier
 - Collatz Conjecture
 - Pig Latin Translator
+- Atbash Cipher
 
 **Data Structures & Algorithms:**
 - Matching Brackets
