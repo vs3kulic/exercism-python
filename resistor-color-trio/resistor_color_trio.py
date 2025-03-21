@@ -53,14 +53,14 @@ def label(colors):
     _value = value(colors[:2]) * multiplier
 
     # check if the value is in the range of the resistor value
-    unit_map = {
+    unit_dict = {
         1e9: "gigaohms",
         1e6: "megaohms",
         1e3: "kiloohms",
         1: "ohms"
     }
 
-    for divisor, unit in unit_map.items():
+    for divisor, unit in unit_dict.items():
         if _value >= divisor:
             _value /= divisor
             return f"{int(_value)} {unit}"
