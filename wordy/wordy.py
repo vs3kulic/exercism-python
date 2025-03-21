@@ -34,14 +34,13 @@ def get_tokens(question: str) -> list[str]:
 
 def validate_tokens(tokens: list[str]) -> None:
     """
-    Validate token values. Every second-even token (0, 2, 4, ...) should be a number;
-    every second-odd token (1, 3, 5, ...) should be an operation
+    Validate token structure for math expressions.
 
     param: tokens: list of tokens
-    return None
+    return: None
     """
     # validate if there are tokens
-    if tokens == []:
+    if not tokens:
         raise ValueError("syntax error")
 
     # validate number tokens
@@ -49,18 +48,23 @@ def validate_tokens(tokens: list[str]) -> None:
         try:
             int(number)
         except ValueError as exc:
-            if index == 0:
-                if number in OPERATIONS:
+            match (index == 0, number in OPERATIONS):
+                case (True, True): # case 1
                     raise ValueError("syntax error") from exc
-                raise ValueError("unknown operation") from exc
-            raise ValueError("syntax error") from exc
+                case (True, False): # case 2
+                    raise ValueError("unknown operation") from exc
+                case (False, False): # case 3
+                    raise ValueError("syntax error") from exc
 
     # validate operation tokens
     for operation in tokens[1::2]:
-        if operation not in OPERATIONS:
-            if operation.isnumeric():
+        match (operation in OPERATIONS, operation.isnumeric()):
+            case (False, False): # case 1
+                raise ValueError("unknown operation")
+            case (True, True): # case 2
                 raise ValueError("syntax error")
-            raise ValueError("unknown operation")
+            case (False, True): # case 3
+                raise ValueError("syntax error")
 
     # after validating individual tokens, check overall structure of the expression
     if len(tokens) % 2 == 0:
@@ -74,13 +78,13 @@ def calculate_result(tokens: list[str]) -> int:
     param: tokens: list of tokens
     return: result of the calculation
     """
-    result = int(tokens[0])
-    numbers = [int(token) for token in tokens[2::2]]
-    operations = [OPERATIONS[tokens[i]] for i in range(1, len(tokens), 2)]
+    result = int(tokens[0]) # start with first number in the expression as initial value
+    numbers = [int(token) for token in tokens[2::2]] # extract numbers from the tokens
+    operations = [OPERATIONS[tokens[i]] for i in range(1, len(tokens), 2)] # extract operations from the tokens
 
     for op, num in zip(operations, numbers):
         result = op(result, num)
-        
+
     return result
 
 
