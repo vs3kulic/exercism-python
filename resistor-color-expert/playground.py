@@ -87,24 +87,35 @@ def resistor_label(colors):
     params: colors: list[str]: A list of colors representing the bands of the resistor.
     returns: str: The resistance value of the resistor.
     """
-    if len(colors) == 1:
-        return f"{COLORS.index(colors[0])} ohms"
-    if len(colors) == 4: # 3 significant digits and a multiplier
-        colors = ['black', *colors] 
-    if len(colors) != 5: # 3 significant digits, a multiplier, and a tolerance
-        raise ValueError("Requires 1, 4, or 5 bands")
+    match len(colors):
+        case 1:
+            return f"{COLORS.index(colors[0])} ohms"
+        case 4:
+            colors = ['black', *colors]
+            try:
+                significant = ''.join(str(COLORS.index(c)) for c in colors[:3])
+                value = int(significant) * 10 ** COLORS.index(colors[3])
+                tolerance = TOLERANCES[colors[4]]
+            except (ValueError, KeyError) as exc:
+                raise ValueError("Invalid color code") from exc
 
-    try:
-        significant = ''.join(str(COLORS.index(c)) for c in colors[:3]) # First three colors are significant
-        value = int(significant) * 10 ** COLORS.index(colors[3])
-        tolerance = TOLERANCES[colors[4]]
-    except (ValueError, KeyError) as exc:
-        raise ValueError("Invalid color code") from exc
+            for divisor, prefix in sorted(PREFIXES.items(), reverse=True):
+                if value >= divisor:
+                    formatted_value = f"{value / divisor:.3g}"  # 3 significant figures
+                    return f"{formatted_value} {prefix} ±{tolerance}%"
+            return f"{value:g} ohms ±{tolerance}%"
+        case 5:
+            try:
+                significant = ''.join(str(COLORS.index(c)) for c in colors[:3])
+                value = int(significant) * 10 ** COLORS.index(colors[3])
+                tolerance = TOLERANCES[colors[4]]
+            except (ValueError, KeyError) as exc:
+                raise ValueError("Invalid color code") from exc
 
-    # Check largest divisors first (giga -> mega -> kilo)
-    for divisor, prefix in sorted(PREFIXES.items(), reverse=True):
-        if value >= divisor:
-            formatted_value = f"{value / divisor:.3g}"  # 3 significant figures
-            return f"{formatted_value} {prefix} ±{tolerance}%"
-    
-    return f"{value:g} ohms ±{tolerance}%"
+            for divisor, prefix in sorted(PREFIXES.items(), reverse=True):
+                if value >= divisor:
+                    formatted_value = f"{value / divisor:.3g}"  # 3 significant figures
+                    return f"{formatted_value} {prefix} ±{tolerance}%"
+            return f"{value:g} ohms ±{tolerance}%"
+        case _:
+            raise ValueError("Requires 1, 4, or 5 bands")
