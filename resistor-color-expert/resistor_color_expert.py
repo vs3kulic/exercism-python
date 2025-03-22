@@ -1,87 +1,59 @@
 """
-A module for the Resistor Color exercise.
+This module contains a function that returns the label of a resistor given its colors.
 """
+import math
 
-COLORS = ['black', 'brown', 'red', 'orange', 'yellow', 'green', 'blue', 'violet', 'grey', 'white']
+COLORS = ["black", "brown", "red", "orange", "yellow", "green", "blue", "violet", "grey", "white"]
 
-def color_code(color):
+TOLERANCES = {
+    "brown": 1,
+    "red": 2,
+    "green": 0.5,
+    "blue": 0.25,
+    "violet": 0.1,
+    "grey": 0.05,
+    "gold": 5,
+    "silver": 10
+}
+
+UNITS = ["ohms", "kiloohms", "megaohms"]
+
+
+def resistor_label(colors: list[str]) -> str:
     """
-    Returns the numerical value of a resistor color band.
+    Returns the label of a resistor given its colors.
 
-    param color: str
-    return: int
+    params: colors: list of strings, each string is a color of the resistor. The first 3 colors
+    represent the first 3 digits of the resistor value, the 4th color represents the
+    multiplier, and the 5th color represents the tolerance.
+
     """
-    code = COLORS.index(color)
+    if len(colors) == 1:
+        value = COLORS.index(colors[0])
+        return f"{value} {UNITS[0]}"
 
-    return code
+    # If the resistor has 4 colors, the first color is the tolerance
+    if len(colors) == 4:
+        colors.insert(0, COLORS[0])
 
+    # If the resistor has 5 colors, the first 3 colors are the value, the 4th color is the multiplier, and the 5th color is the tolerance
+    if len(colors) == 5:
+        value = 0
+        acc = 1
 
-def colors():
-    """
-    Returns the list of all resistor color bands.
+        for color in colors[-3::-1]: 
+            value += COLORS.index(color) * acc
+            acc *= 10
+            
+        value *= 10 ** COLORS.index(colors[3])
 
-    param: None
-    return: list
-    """
+        unit_index = int(math.log10(value) / 3) # math.log10(1000) = 3
+        unit = UNITS[unit_index]
 
-    return COLORS
+        value /= 10 ** (3 * unit_index)
 
+        tolerance = TOLERANCES[colors[4]]
 
-def value(colors):
-    """
-    Takes list of color names and returns the resistor value.
+        return f"{value:n} {unit} ±{tolerance:n}%"
 
-    param: color names as str, limited to two colors e.g. ["brown", "black"] 
-    return: int value of the resistor band, concatenated from the color codes
-    """
-    if len(colors) != 2:
-        raise ValueError("Exactly two colors are required.")
-
-    duo_codes = [color_code(color) for color in colors[0:2:1]] # list comprehension, iterating over the first two elements of the list
-    duo_code = int(''.join(map(str, duo_codes))) # map() function returns a map object (-> iterator) of the results after applying the given function to each item of a given iterable (list, tuple etc.)
-
-    return duo_code
-
-def label(colors):
-    """
-    Returns the label of the resistor value.
-
-    param: color names as str, limited to three colors e.g. ["brown", "black", "red"]
-    return: str label of the resistor value
-    """
-    multiplier = 10 ** color_code(colors[2])
-    _value = value(colors[:2]) * multiplier
-
-    # check if the value is in the range of the resistor value
-    unit_dict = {
-        1e9: "gigaohms",
-        1e6: "megaohms",
-        1e3: "kiloohms",
-        1: "ohms"
-    }
-
-    for divisor, unit in unit_dict.items():
-        if _value >= divisor:
-            _value /= divisor
-            return f"{int(_value)} {unit}"
-        
-    return f"{int(_value)} ohms"
-
-
-def resistor_label(colors):
-    """
-    Returns the label of the resistor value and tolerance.
-
-    param: color names as str, limited to five colors e.g. ["brown", "black", "red", "gold", "green"]
-    return: str label of the resistor value and tolerance
-    """
-    tolerance_dict = {
-        "silver": 10,
-        "gold": 5,
-        "brown": 1,
-        "red": 2,
-        "green": 0.5,
-        "blue": 0.25,
-        "violet": 0.1,
-        "grey": 0.05,
-    }
+    raise ValueError("Unexpected number of colors passed")
