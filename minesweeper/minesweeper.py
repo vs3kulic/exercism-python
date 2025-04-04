@@ -39,14 +39,10 @@ def annotate(minefield: list[str]) -> list[str]:
     if not minefield:
         return []
 
-    # ... (rest of the code remains unchanged) ...
-
-    if not minefield:
-        return []
+    minefield = [list(row) for row in minefield]
 
     w = len(minefield[0])  # Width (columns)
     h = len(minefield)     # Height (rows)
-    minefield = [list(row) for row in minefield]
 
     for y, row in enumerate(minefield):
         if len(row) != w or any(c not in {"*", " "} for c in row):
