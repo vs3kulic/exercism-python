@@ -16,8 +16,8 @@ def find_anagrams(word, candidates):
     sorted_word = sorted(word.lower())
     
     # Filter candidates that are not the same word and are anagrams
-    anagrams = [candidate for candidate in candidates 
-                if candidate.lower() != word.lower() 
+    anagrams = [candidate for candidate in candidates
+                if candidate.lower() != word.lower()
                 and sorted(candidate.lower()) == sorted_word]
-    
+
     return anagrams
