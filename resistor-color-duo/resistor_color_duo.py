@@ -29,15 +29,22 @@ def colors():
 
 def value(colors):
     """
-    Takes list of color names and returns the resistor value.
+    Calculates resistor value from two color bands.
 
-    param: color names as str, limited to two colors e.g. ["brown", "black"] 
-    return: int value of the resistor band, concatenated from the color codes
+    Args:
+        colors (list[str]): Two color names from the resistor color code set
+        (e.g., ["brown", "red"]).
+
+    Returns:
+        int: Combined numerical value of the first two bands.
+
+    Raises:
+        ValueError: If input isn't exactly two colors or contains invalid names.
     """
     if len(colors) != 2:
-        raise ValueError("Exactly two colors are required.")
+        raise ValueError("Exactly two colors required. Example: ['brown', 'black']")
 
-    duo_codes = [color_code(color) for color in colors[0:2:1]] # list comprehension, iterating over the first two elements of the list
-    duo_code = int(''.join(map(str, duo_codes))) # map() function returns a map object (-> iterator) of the results after applying the given function to each item of a given iterable (list, tuple etc.)
+    duo_codes = [color_code(color) for color in colors]
+    duo_code = int(''.join(map(str, duo_codes)))
 
     return duo_code

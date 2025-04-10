@@ -5,10 +5,6 @@ This module provides functionality to annotate a Minesweeper board by replacing 
 with counts of adjacent mines. The board is represented as a list of strings where:
 - '*' represents a mine
 - ' ' represents an empty space
-
-Example:
-    Input board:  [" * ", "  *"]
-    Annotated: ["1*1", " 12*"]
 """
 
 def annotate(minefield: list[str]) -> list[str]:
@@ -39,7 +35,7 @@ def annotate(minefield: list[str]) -> list[str]:
     if not minefield:
         return []
 
-    minefield = [list(row) for row in minefield]
+    minefield = [list(row) for row in minefield] # Convert to list of lists
 
     w = len(minefield[0])  # Width (columns)
     h = len(minefield)     # Height (rows)
