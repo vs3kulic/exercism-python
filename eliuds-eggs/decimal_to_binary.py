@@ -1,3 +1,7 @@
+"""
+A simple module to convert a decimal number to binary using the base-2 logarithm.
+"""
+
 def log2(n):
     """
     Manual calculation of the base-2 logarithm of a number.
