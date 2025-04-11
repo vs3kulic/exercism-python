@@ -29,7 +29,21 @@ def find(search_list, value):
         ...
         ValueError: value not in array
     """
+    if not isinstance(search_list, list):
+        raise TypeError("search_list must be a list")
+    if not all(isinstance(i, (int, float)) for i in search_list):
+        raise TypeError("search_list must contain only numbers")
+    if not all(search_list[i] <= search_list[i + 1] for i in range(len(search_list) - 1)):
+        raise ValueError("search_list must be sorted in ascending order")
+    if not isinstance(value, (int, float)):
+        raise TypeError("value must be a number")
+    if len(search_list) == 0:
+        raise ValueError("array is empty")
+    if value < search_list[0] or value > search_list[-1]:
+        raise ValueError("value not in array")
+    
     if value in search_list:
         return search_list.index(value)
+    
 
     raise ValueError("value not in array")
