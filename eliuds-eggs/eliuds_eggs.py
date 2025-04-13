@@ -30,7 +30,7 @@ def egg_count(display_value):
     count = 0
 
     while display_value > 0:
-        count += display_value % 2 == 1 # increment count if the LSB is 1
+        count += (display_value % 2) # increment count if the LSB is 1
         display_value //= 2 # shift right by one bit with integer division
 
     return count
