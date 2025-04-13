@@ -30,9 +30,7 @@ def egg_count(display_value):
     count = 0
 
     while display_value > 0:
-        # check if the last bit is 1 (odd number)
-        if display_value % 2 == 1:
-            count += 1
-        display_value //= 2 # remove the last bit with an int division by 2
+        count += display_value % 2 == 1 # increment count if the LSB is 1
+        display_value //= 2 # shift right by one bit with integer division
 
     return count

@@ -53,7 +53,7 @@ def decimal_to_binary_log(n):
         pos = log2(n) # Get the position of the highest power of 2
         binary = '1' + binary # Prepend '1' to the binary string
         
-        for _ in range(pos - len(binary) + 1): 
+        for _ in range(pos - len(binary) + 1):
             binary = '0' + binary # Prepend '0's to the binary string
         
         n -= 2 ** pos # Subtract the value of the highest power of 2 from n
