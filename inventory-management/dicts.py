@@ -1,4 +1,8 @@
-"""Functions to keep track and alter inventory."""
+"""
+Functions to manage an inventory of items using a dictionary.
+This module provides functions to create an inventory, add items, decrement items,
+remove items, and list the inventory.
+"""
 
 def create_inventory(items):
     """Create a dict that tracks the amount (count) of each element on the `items` list.
@@ -6,7 +10,10 @@ def create_inventory(items):
     :param items: list - list of items to create an inventory from.
     :return: dict - the inventory dictionary.
     """
-    inventory = {item: items.count(item) for item in set(items)}
+    inventory = {}
+
+    for item in items:
+        inventory[item] = inventory.get(item, 0) + 1
 
     return inventory
 
@@ -17,9 +24,10 @@ def add_items(inventory, items):
     :param items: list - list of items to update the inventory with.
     :return: dict - the inventory updated with the new items.
     """
+    for item in items:
+        inventory[item] = inventory.get(item, 0) + 1
 
-    pass
-
+    return inventory
 
 def decrement_items(inventory, items):
     """Decrement items in inventory using elements from the `items` list.
@@ -28,9 +36,11 @@ def decrement_items(inventory, items):
     :param items: list - list of items to decrement from the inventory.
     :return: dict - updated inventory with items decremented.
     """
+    for item in items:
+        if item in inventory and inventory[item] > 0:
+                inventory[item] -= 1
 
-    pass
-
+    return inventory
 
 def remove_item(inventory, item):
     """Remove item from inventory if it matches `item` string.
@@ -39,8 +49,10 @@ def remove_item(inventory, item):
     :param item: str - item to remove from the inventory.
     :return: dict - updated inventory with item removed. Current inventory if item does not match.
     """
+    if item in inventory:
+        inventory.pop(item)
 
-    pass
+    return inventory
 
 
 def list_inventory(inventory):
@@ -49,8 +61,6 @@ def list_inventory(inventory):
     :param inventory: dict - an inventory dictionary.
     :return: list of tuples - list of key, value pairs from the inventory dictionary.
     """
+    inventory = [(item, count) for item, count in inventory.items() if count > 0]
 
-    pass
-
-
-print(create_inventory(["egg", "milk", "bread", "egg", "egg"])) # {'egg': 0, 'milk': 0, 'bread': 0}
+    return inventory
