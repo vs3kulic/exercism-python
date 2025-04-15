@@ -1,3 +1,7 @@
+"""
+This module contains a function to generate verses of the "10 Green Bottles" song.
+"""
+
 def recite(start, take=1):
     """
     Generates verses of the "10 Green Bottles" song with proper grammar for values 0-10.
@@ -9,7 +13,14 @@ def recite(start, take=1):
     Returns:
         list: Song lines with verse separation
     
-    Example: (unchanged)
+    Example: 
+        >>> recite(10, 1)
+        [
+            "Ten green bottles hanging on the wall,",
+            "Ten green bottles hanging on the wall,",
+            "And if one green bottle should accidentally fall,",
+            "There'll be nine green bottles hanging on the wall.",
+        ]
     """
     numbers = {
         0: "no", 1: "one", 2: "two", 3: "three",
