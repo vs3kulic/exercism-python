@@ -4,7 +4,6 @@ Binary Search Module.
 This module provides an implementation of the binary search algorithm, which is
 an efficient method for finding the position of a target value within a sorted list.
 """
-from bisect import bisect_left
 
 def find(search_list, value):
     """
@@ -33,10 +32,17 @@ def find(search_list, value):
     """
     if not search_list:
         raise ValueError("value not in array")
-
-    # by default, lo is set to 0, hi is set to len(list)
-    index = bisect_left(search_list, value)
     
-    if index != len(search_list) and search_list[index] == value:
-        return index
-    raise ValueError("value not in array")
+    lower, upper = 0, len(search_list) - 1
+
+    while lower <= upper:
+        mid = (lower + upper) // 2
+        mid_value = search_list[mid]
+
+        if mid_value < value:
+            lower = mid + 1
+        if mid_value > value:
+            upper = mid - 1
+        if mid_value == value:
+            return mid  # Value found
+    raise ValueError("value not in array")  # Value not found

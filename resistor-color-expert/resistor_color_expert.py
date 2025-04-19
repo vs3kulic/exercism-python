@@ -90,14 +90,15 @@ def resistor_label(colors):
     if len(colors) == 1:
         return f"{COLORS.index(colors[0])} ohms"
     if len(colors) == 4: # 3 significant digits and a multiplier
-        colors = ['black', *colors] 
+        colors = ['black', *colors]
     if len(colors) != 5: # 3 significant digits, a multiplier, and a tolerance
         raise ValueError("Requires 1, 4, or 5 bands")
 
     try:
         significant = ''.join(str(COLORS.index(c)) for c in colors[:3]) # First three colors are significant
-        value = int(significant) * 10 ** COLORS.index(colors[3])
-        tolerance = TOLERANCES[colors[4]]
+        value = int(significant) * 10 ** COLORS.index(colors[3]) # Fourth color is the multiplier
+        tolerance = TOLERANCES[colors[4]] # Fifth color is the tolerance
+
     except (ValueError, KeyError) as exc:
         raise ValueError("Invalid color code") from exc
 
