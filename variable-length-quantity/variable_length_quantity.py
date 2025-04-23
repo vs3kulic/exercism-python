@@ -19,21 +19,20 @@ def encode(numbers):
     encoded_bytes = []
 
     for number in numbers:
+        chunks = []
+
         if number == 0:
-            encoded_bytes.append(0) # # Zero is encoded as single byte 0x00
+            encoded_bytes.append(0) # Zero is encoded as single byte 0x00
             continue
 
-        chunks = []
-        n = number
-
-        while n > 0:
-            chunks.append(n % 128)  # Extract 7 bits
-            n //= 128 # Shift right by 7 bits
+        while number > 0:
+            chunks.append(number % 128)  # Extract 7 bits
+            number //= 128 # Shift right by 7 bits
     
-        chunks.reverse() # Reverse chunks for big-endian order
+        chunks.reverse()  # Reverse chunks for big-endian order
 
-        for i in range(len(chunks) - 1):
-            chunks[i] += 128 # Set continuation bit (MSB) for all but last chunk
+        for i in range(len(chunks) - 1):  # Iterate over all but the last chunk
+            chunks[i] += 128  # Set continuation bit (MSB)
 
         encoded_bytes.extend(chunks)
 
@@ -67,9 +66,10 @@ def decode(bytes_):
 
         if byte >= 128: # Check continuation flag / byte (MSB)
             expecting_more = True # expect more bytes
+
         else:
-            numbers.append(current_number) # Last byte of current number
-            current_number = 0
+            numbers.append(current_number) # Append complete number
+            current_number = 0 # Reset for next integer
             expecting_more = False
 
     if expecting_more:
