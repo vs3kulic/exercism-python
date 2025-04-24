@@ -62,5 +62,3 @@ def recite(start_verse, end_verse):
         song.append(verse_str)
 
     return song
-
-print(recite(2, 2))
