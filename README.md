@@ -15,94 +15,78 @@ This repository contains my personal solutions to exercises from [Exercism](http
 ## Included Exercises
 
 ### Text & String Manipulation
-| Exercise Name         | Topic (Category)         | Key Concepts                     |
-|------------------------|--------------------------|-----------------------------------|
-| **Anagram**           | Text & String Manipulation | Sorting, Character Frequency     |
-| **Atbash-Cipher**     | Text & String Manipulation | Encoding, Decoding               |
-| **Isogram**           | Text & String Manipulation | Unique Characters, Validation    |
-| **Pangram**           | Text & String Manipulation | Alphabet Coverage, Validation    |
-| **Pig-Latin**         | Text & String Manipulation | String Manipulation, Rules       |
-| **RNA-Transcription** | Text & String Manipulation | String Mapping, Biology          |
-| **Rotational-Cipher** | Text & String Manipulation | Caesar Cipher, Rotation          |
-| **Twelve-Days**       | Text & String Manipulation | Iteration, String Formatting     |
-| **Little-Sisters-Essay** | Text & String Manipulation | Text Analysis, Word Count        |
-| **Little-Sisters-Vocab** | Text & String Manipulation | Vocabulary, Word Matching        |
-| **Isbn-Verifier**     | Text & String Manipulation | Validation, Checksum             |
+| **Anagram**           | Sorting, Character Frequency     |
+| **Atbash-Cipher**     | Encoding, Decoding               |
+| **Isogram**           | Unique Characters, Validation    |
+| **Pangram**           | Alphabet Coverage, Validation    |
+| **Pig-Latin**         | String Manipulation, Rules       |
+| **RNA-Transcription** | String Mapping, Biology          |
+| **Rotational-Cipher** | Caesar Cipher, Rotation          |
+| **Twelve-Days**       | Iteration, String Formatting     |
+| **Little-Sisters-Essay** | Text Analysis, Word Count        |
+| **Little-Sisters-Vocab** | Vocabulary, Word Matching        |
+| **Isbn-Verifier**     | Validation, Checksum             |
 
 ---
 
 ### Mathematical & Numerical Problems
-| Exercise Name         | Topic (Category)         | Key Concepts                     |
-|------------------------|--------------------------|-----------------------------------|
-| **Armstrong-Numbers** | Mathematical Problems    | Exponentiation, Digit Analysis   |
-| **Collatz-Conjecture**| Mathematical Problems    | Recursion, Iteration             |
-| **Grains**            | Mathematical Problems    | Exponential Growth, Summation    |
-| **Leap**              | Mathematical Problems    | Conditional Logic, Modulo        |
-| **Perfect-Numbers**   | Mathematical Problems    | Divisors, Classification         |
-| **Raindrops**         | Mathematical Problems    | Divisibility, String Mapping     |
-| **Square-Root**       | Mathematical Problems    | Approximation, Iterative Methods |
-| **Wordy**             | Mathematical Problems    | Parsing, Arithmetic              |
+| **Armstrong-Numbers** | Exponentiation, Digit Analysis   |
+| **Collatz-Conjecture**| Recursion, Iteration             |
+| **Grains**            | Exponential Growth, Summation    |
+| **Leap**              | Conditional Logic, Modulo        |
+| **Perfect-Numbers**   | Divisors, Classification         |
+| **Raindrops**         | Divisibility, String Mapping     |
+| **Square-Root**       | Approximation, Iterative Methods |
+| **Wordy**             | Parsing, Arithmetic              |
 
 ---
 
 ### Data Structures & Algorithms
-| Exercise Name         | Topic (Category)         | Key Concepts                     |
-|------------------------|--------------------------|-----------------------------------|
-| **Binary-Search**     | Data Structures & Algorithms | Searching, Sorted Arrays         |
-| **Matching-Brackets** | Data Structures & Algorithms | Stack, Parentheses Matching      |
-| **Sublist**           | Data Structures & Algorithms | List Comparison, Subsequence     |
-| **Inventory-Management** | Data Structures & Algorithms | Dictionaries, Aggregation        |
-| **Making-The-Grade**  | Data Structures & Algorithms | Sorting, Aggregation             |
+| **Binary-Search**     | Searching, Sorted Arrays         |
+| **Matching-Brackets** | Stack, Parentheses Matching      |
+| **Sublist**           | List Comparison, Subsequence     |
+| **Inventory-Management** | Dictionaries, Aggregation        |
+| **Making-The-Grade**  | Sorting, Aggregation             |
 
 ---
 
 ### Games & Simulations
-| Exercise Name         | Topic (Category)         | Key Concepts                     |
-|------------------------|--------------------------|-----------------------------------|
-| **Black-Jack**        | Games & Simulations      | Card Games, Probability          |
-| **Card-Games**        | Games & Simulations      | Deck Manipulation, Rules         |
-| **Ghost-Gobble-Arcade-Game** | Games & Simulations | Game Logic, Movement             |
-| **Minesweeper**       | Games & Simulations      | Grid Manipulation, Logic          |
-| **Chaitanas-Colossal-Coaster** | Games & Simulations | Simulation, Queue Management     |
+| **Black-Jack**        | Card Games, Probability          |
+| **Card-Games**        | Deck Manipulation, Rules         |
+| **Ghost-Gobble-Arcade-Game** | Game Logic, Movement             |
+| **Minesweeper**       | Grid Manipulation, Logic          |
+| **Chaitanas-Colossal-Coaster** | Simulation, Queue Management     |
 
 ---
 
 ### Electronics & Encoding
-| Exercise Name         | Topic (Category)         | Key Concepts                     |
-|------------------------|--------------------------|-----------------------------------|
-| **Resistor-Color**    | Electronics & Encoding   | Mapping, Color Codes             |
-| **Resistor-Color-Duo**| Electronics & Encoding   | Mapping, Color Codes             |
-| **Resistor-Color-Trio** | Electronics & Encoding | Mapping, Color Codes             |
-| **Resistor-Color-Expert** | Electronics & Encoding | Advanced Mapping, Color Codes    |
-| **Variable-Length-Quantity** | Electronics & Encoding | Encoding, Decoding               |
-| **All-Your-Base**     | Electronics & Encoding   | Base Conversion, Arithmetic      |
+| **Resistor-Color**    | Mapping, Color Codes             |
+| **Resistor-Color-Duo**| Mapping, Color Codes             |
+| **Resistor-Color-Trio** | Mapping, Color Codes             |
+| **Resistor-Color-Expert** | Advanced Mapping, Color Codes    |
+| **Variable-Length-Quantity** | Encoding, Decoding               |
+| **All-Your-Base**     | Base Conversion, Arithmetic      |
 
 ---
 
 ### Geometry & Patterns
-| Exercise Name         | Topic (Category)         | Key Concepts                     |
-|------------------------|--------------------------|-----------------------------------|
-| **Darts**             | Geometry & Patterns      | Distance, Scoring                |
-| **Diamond**           | Geometry & Patterns      | ASCII Art, Symmetry              |
-| **Triangle**          | Geometry & Patterns      | Geometry, Validation             |
+| **Darts**             | Distance, Scoring                |
+| **Diamond**           | ASCII Art, Symmetry              |
+| **Triangle**          | Geometry, Validation             |
 
 ---
 
 ### Syntax & Logic Fundamentals
-| Exercise Name         | Topic (Category)         | Key Concepts                     |
-|------------------------|--------------------------|-----------------------------------|
-| **Bob**               | Syntax & Logic Fundamentals | Conditional Logic, String Matching |
-| **Meltdown-Mitigation** | Syntax & Logic Fundamentals | Control Flow, Safety Checks      |
-| **Secret-Handshake**  | Syntax & Logic Fundamentals | Binary Logic, Decoding           |
-| **Tisbury-Treasure-Hunt** | Syntax & Logic Fundamentals | Mapping, Logic                   |
+| **Bob**               | Conditional Logic, String Matching |
+| **Meltdown-Mitigation** | Control Flow, Safety Checks      |
+| **Secret-Handshake**  | Binary Logic, Decoding           |
+| **Tisbury-Treasure-Hunt** | Mapping, Logic                   |
 
 ---
 
 ### Miscellaneous
-| Exercise Name         | Topic (Category)         | Key Concepts                     |
-|------------------------|--------------------------|-----------------------------------|
-| **Bottle-Song**       | Miscellaneous            | Iteration, String Formatting     |
-| **Eliuds-Eggs**       | Miscellaneous            | Simulation, Iteration            |
+| **Bottle-Song**       | Iteration, String Formatting     |
+| **Eliuds-Eggs**       | Simulation, Iteration            |
 
 ---
 
