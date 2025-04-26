@@ -3,7 +3,6 @@ A module to transform legacy data into a new format.
 The legacy data is a dictionary where the keys are scores and the values are lists of letters: 
 """
 
-
 def transform(legacy_data):
     """
     A function to transform legacy data into a new format:
@@ -28,4 +27,3 @@ def transform(legacy_data):
             current_data[letter.lower()] = score # add key (letter) with value (score) to dict
 
     return current_data
-
