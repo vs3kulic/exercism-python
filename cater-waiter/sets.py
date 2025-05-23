@@ -8,7 +8,6 @@ from sets_categories_data import (VEGAN,
                                   ALCOHOLS,
                                   SPECIAL_INGREDIENTS)
 
-
 def clean_ingredients(dish_name, dish_ingredients):
     """Remove duplicates from `dish_ingredients`.
 
