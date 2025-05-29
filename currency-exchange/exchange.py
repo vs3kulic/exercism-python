@@ -65,14 +65,14 @@ def exchangeable_value(budget: float, exchange_rate: float, spread: int, denomin
     """
     # Calculate exchange rate with spread fee
     rate_with_spread = exchange_rate * (1 + spread / 100)
-    
+
     # Get foreign currency amount after exchange
     foreign_currency_amount = exchange_money(budget, rate_with_spread)
-    
+
     # Calculate how many complete bills we can get
     number_of_bills = get_number_of_bills(foreign_currency_amount, denomination)
-    
+
     # Calculate total value of those bills
     total_bill_value = get_value_of_bills(denomination, number_of_bills)
-    
+
     return total_bill_value
