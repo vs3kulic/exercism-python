@@ -63,10 +63,9 @@ def exchangeable_value(budget: float, exchange_rate: float, spread: int, denomin
     :param denomination: int - the value of a single bill
     :return: int - maximum value you can get
     """
-    # Calculate the spread multiplier
-    spread_multiplier = 1 + (spread / 100)
-    foreign_amount = int(budget / (exchange_rate * spread_multiplier))
-    number_of_bills = foreign_amount // denomination
-    exchange_value = number_of_bills * denomination
+    actual_rate = exchange_rate + (exchange_rate * (spread / 100))
+    total_new_currency = exchange_money(budget, actual_rate)
+    bill_value_new_currency = get_number_of_bills(total_new_currency, denomination)
+    maximum_value_new_currency = get_value_of_bills(denomination, bill_value_new_currency)
 
-    return exchange_value
+    return maximum_value_new_currency
