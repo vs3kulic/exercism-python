@@ -71,7 +71,7 @@ def fix_wagon_depot(wagons_rows):
 
     # Use zip to transpose the rows
     # Use list comprehension to create a new list of lists
-    # * operator unpacks the outer list so that each of its elements (the inner lists) 
+    # * operator unpacks the outer list so that each of its elements (the inner lists)
     # are passed as separate arguments to `zip()
     transposed_rows = [list(row) for row in zip(*wagons_rows)]
 
