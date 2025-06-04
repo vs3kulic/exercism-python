@@ -8,7 +8,7 @@ This library provides functions to calculate the number of grains on a chessboar
 Run the following command in the terminal to install your library locally for testing:
 
 ```bash
-pip install grainsy
+pip install .
 ```
 
 ## Usage

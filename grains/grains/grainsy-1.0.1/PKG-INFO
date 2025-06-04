@@ -1,3 +1,12 @@
+Metadata-Version: 2.1
+Name: grainsy
+Version: 1.0.1
+Summary: Library for calculating grains on a chessboard
+Author: Vajo Sekulic
+Author-email: hello@bekindstudio.at
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+
 # Grains Library
 
 This library provides functions to calculate the number of grains on a chessboard.
@@ -8,7 +17,7 @@ This library provides functions to calculate the number of grains on a chessboar
 Run the following command in the terminal to install your library locally for testing:
 
 ```bash
-pip install grainsy
+pip install .
 ```
 
 ## Usage

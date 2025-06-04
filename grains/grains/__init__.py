@@ -1,0 +1,1 @@
+from .grains import square, total
