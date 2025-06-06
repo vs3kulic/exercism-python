@@ -10,13 +10,13 @@ def square(number):
     :return: int - the number of grains on that square
     """
     # Raise an error if the number is not in the valid range
-    if (number < 1) or (number > 64):
+    if not (1 <= number <= 64):
         raise ValueError("square must be between 1 and 64")
 
     # Calculate the number of grains on the given square
-    grains_on_square = 2 ** (number - 1)
-
-    return grains_on_square
+    number_of_grains = 2 ** (number - 1)
+    
+    return number_of_grains
 
 def total():
     """
