@@ -21,8 +21,7 @@ class Alien:
 
     def __init__(self, x_coordinate=0, y_coordinate=0, health=3):
         """Initialize an Alien object with coordinates and health."""
-        self.x_coordinate = x_coordinate
-        self.y_coordinate = y_coordinate
+        self.x_coordinate, self.y_coordinate = x_coordinate, y_coordinate
         self.health = health
         Alien.total_aliens_created += 1
 
@@ -36,8 +35,7 @@ class Alien:
 
     def teleport(self, new_x_coordinate, new_y_coordinate):
         """Move Alien object to new coordinates."""
-        self.x_coordinate = new_x_coordinate
-        self.y_coordinate = new_y_coordinate
+        self.x_coordinate, self.y_coordinate = new_x_coordinate, new_y_coordinate
 
     def collision_detection(self, other):
         """Check if this Alien collides with another Alien.
@@ -45,10 +43,9 @@ class Alien:
         Returns:
             True if the coordinates match, otherwise None.
         """
-        if self.x_coordinate == other.x_coordinate and self.y_coordinate == other.y_coordinate:
+        if (self.x_coordinate, self.y_coordinate) == (other.x_coordinate, other.y_coordinate):
             return True
         return None
-
 
 def new_aliens_collection(coordinates):
     """Create a list of Alien objects based on provided coordinates.
@@ -56,5 +53,20 @@ def new_aliens_collection(coordinates):
     param coordinates: list of tuples - Each tuple contains (x_coordinate, y_coordinate) for an Alien.
     :return: list - A list of Alien objects.
     """
-    # Alternatively use list comprehension to create the list of Alien objects
-    return [Alien(x, y) for x, y in coordinates]
+    # Using list comprehension to create a list of Alien objects from the coordinates
+    return [Alien(x_coordinate, y_coordinate) for x_coordinate, y_coordinate in coordinates]
+
+    # -------------------------------------------------------------------------
+    # Alternative implementation using a for loop (commented out for reference)
+    # -------------------------------------------------------------------------
+    # Initialize a list of new Alien objects
+    # new_aliens = []
+
+    # Loop through the coordinates and create an Alien object for each tuple
+    # for x, y in coordinates:
+    #    new_alien = Alien(x, y)
+
+    # Append the newly created Alien object to the list
+    #    new_aliens.append(new_alien)
+
+    # return new_aliens
