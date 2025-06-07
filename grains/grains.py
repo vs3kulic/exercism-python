@@ -15,7 +15,7 @@ def square(number):
 
     # Calculate the number of grains on the given square
     number_of_grains = 2 ** (number - 1)
-    
+
     return number_of_grains
 
 def total():
