@@ -8,6 +8,10 @@ filled with numbers from 1 to n^2.
 
 def spiral_matrix(size: int) -> list[list[int]]:
     """Return n x n spiral matrix filled from 1 to n^2."""
+    # Validate the input size
+    if size < 0:
+        raise ValueError("Size must be a non-negative integer.")
+    
     # Create an n x n matrix initialized with zeros
     matrix = [[0] * size for _ in range(size)]
     
