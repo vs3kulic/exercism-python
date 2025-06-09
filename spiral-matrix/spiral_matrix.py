@@ -3,7 +3,7 @@ This module provides a function to generate an n x n spiral matrix
 filled with numbers from 1 to n^2.
 """
 # ------------------------------------------
-# Main function to generate a spiral matrix
+# Main functions to generate a spiral matrix
 # ------------------------------------------
 
 def spiral_matrix(size: int) -> list[list[int]]:
