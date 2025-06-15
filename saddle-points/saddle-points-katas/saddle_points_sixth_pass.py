@@ -45,3 +45,13 @@ def find_column_minima(matrix: list[list[int]]) -> list[int]:
     column_minima = [min(column) for column in zip(*matrix)]
 
     return column_minima
+
+# Example usage:
+if __name__ == "__main__":
+    matrix = [[8, 7, 9],
+              [6, 7, 6],
+              [3, 2, 5]]
+    try:
+        print(saddle_points(matrix))
+    except ValueError as e:
+        print(e)
