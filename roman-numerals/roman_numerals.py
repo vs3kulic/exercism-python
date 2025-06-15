@@ -2,6 +2,8 @@
 This iteration passes all tests in the Roman Numerals Kata.
 """
 # Map integers to Roman numeral symbols, list of tuples
+MIN_ROMAN_VALUE = 1
+MAX_ROMAN_VALUE = 3999
 ROMAN_NUMERALS = [
     (1000, "M"), (900, "CM"), (500, "D"), (400, "CD"),
     (100, "C"), (90, "XC"), (50, "L"), (40, "XL"),
@@ -15,7 +17,7 @@ def roman(number: int) -> str:
     return: str - Roman numeral representation of the number.
     """
     # Add input validation
-    if not isinstance(number, int) or not (1 <= number <= 3999):
+    if not isinstance(number, int) or not (MIN_ROMAN_VALUE <= number <= MAX_ROMAN_VALUE):
         raise ValueError(f'Input must be an integer number between 1 and 3999, got {number}')
 
     # Initialise the result string outside the loop
