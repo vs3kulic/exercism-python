@@ -1,5 +1,5 @@
 """This module demonstrates a basic implementation of converting integers to Roman numerals.
-This iteration passes all tests in the Roman Numerals Kata.
+This iteration implements a Greedy Algorithm Pattern, passing all tests in the Roman Numerals Kata.
 """
 # Map integers to Roman numeral symbols, list of tuples
 MIN_ROMAN_VALUE = 1
