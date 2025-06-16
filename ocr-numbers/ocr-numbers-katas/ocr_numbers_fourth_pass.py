@@ -82,3 +82,13 @@ def convert(input_grid: list[str]) -> str:
     
     # Join results with commas
     return ",".join(results)
+
+# Example usage
+if __name__ == "__main__":
+    input_example = [
+        " _ ",
+        "| |",
+        "|_|",
+        "   "
+    ]
+    print(convert(input_example))  # Should print "0"
