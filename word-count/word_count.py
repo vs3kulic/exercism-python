@@ -31,7 +31,7 @@ def _normalise_text(text: str) -> list:
     for char in ".,;:!?\"&@$%^_":
         text = text.replace(char, " ")
 
-    # Simple cleaning function
+    # Clean and split the text into words, stripping leading and trailing apostrophes
     _words = []
 
     for word in text.lower().split():
