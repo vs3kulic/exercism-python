@@ -29,8 +29,8 @@ def concat(lists: list[list]) -> list:
     # Initialise an empty list, then iterate through each list to extend the concatenated list
     concatenated_list = []
 
-    for _list in lists: 
-        concatenated_list.extend(_list)
+    for lst in lists: 
+        concatenated_list.extend(lst)
     
     return concatenated_list
 
