@@ -16,11 +16,11 @@ def flatten(nested_iterable: Iterable[Any]) -> List[Any]:
 
     flat_result = []
 
+    # Recursive flattening
     for element in nested_iterable:
         if isinstance(element, (list, tuple)):
-            # Recursive case: flatten further
-            flat_result.extend(flatten(element))
+            flat_result.extend(flatten(element)) # Recursive case: flatten further
         elif element is not None:
-            # Base case: add single element
-            flat_result.append(element)
+            flat_result.append(element) # Base case: add single element
+
     return flat_result
