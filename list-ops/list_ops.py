@@ -54,10 +54,19 @@ def filter(function: Callable, lst: list) -> list:
 
 
 def foldl(function: Callable, lst: list, initial: Any) -> Any:
-    """Fold a list from the left using a function and an initial value."""
+    """Fold a list from the left using a function and an initial value.
+    
+    param function: The function to apply to each element.
+    param lst: The list to fold.
+    param initial: The initial value for the accumulator.
+    return: The final accumulated value.
+    
+    Example: foldl(lambda acc, el: el * acc, [1, 2, 3], 1) returns 6.
+    """
     _validate_list(lst)
 
-    accumulator = initial
+    accumulator = initial # Initialise accumulator with the initial value
+    
     for item in lst:
         accumulator = function(accumulator, item)
 
@@ -68,7 +77,7 @@ def foldr(function: Callable, lst: list, initial: Any) -> Any:
     """Fold a list from the right using a function and an initial value."""
     _validate_list(lst)
 
-    accumulator = initial # Accumulator starts with the initial value
+    accumulator = initial
 
     for item in reversed(lst):
         accumulator = function(accumulator, item)
@@ -76,7 +85,7 @@ def foldr(function: Callable, lst: list, initial: Any) -> Any:
     return accumulator
 
 
-def reverse(lst: list) -> list:  # ← Use 'lst' instead of 'list'
+def reverse(lst: list) -> list:
     """Reverse the input list and return it."""
     _validate_list(lst)
 
