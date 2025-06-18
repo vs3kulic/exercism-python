@@ -83,7 +83,7 @@ def fill_left(matrix: list[list[int]], col: int, start: int, end: int, num: int)
 # -------------------
 # Example usage:
 # -------------------
-SIZE = 5
+SIZE = 8
 result = spiral_matrix(SIZE)
 for row in result:
     print(' '.join(f"{val:2d}" for val in row)) # 2d formatting for better alignment
