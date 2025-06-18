@@ -54,7 +54,7 @@ def _build_dp_table(coins: list[int], target: int) -> list[int]:
             if coin <= amount:
                 coins_with_this_option = dp[amount - coin] + 1
                 dp[amount] = min(dp[amount], coins_with_this_option)
-    
+
     return dp
 
 
@@ -69,12 +69,13 @@ def _reconstruct_solution(coins: list[int], target: int, dp: list[int]) -> list[
     """Reconstruct which coins were used to make the target amount from the DP table."""
     change = []
     remaining = target
-    
+
     while remaining > 0:
         for coin in coins:
-            if (coin <= remaining and dp[remaining - coin] == dp[remaining] - 1):
+            if (coin <= remaining
+                and dp[remaining - coin] == dp[remaining] - 1):
                 change.append(coin)
                 remaining -= coin
                 break
-    
+
     return sorted(change, reverse=False)
