@@ -14,7 +14,6 @@ def append(list1: list, list2: list) -> list:
     _validate_list(list1)
     _validate_list(list2)
 
-
     # Copy list to avoid modifying in place, then extend the copy
     extended_list = list1.copy()
     extended_list.extend(list2)
@@ -27,7 +26,7 @@ def concat(lists: list[list]) -> list:
     # Validate input
     _validate_list(lists)
 
-    # Initialise an empty list, then iterate through each list to extend it
+    # Initialise an empty list, then iterate through each list to extend the concatenated list
     concatenated_list = []
 
     for _list in lists: 
@@ -50,6 +49,7 @@ def filter(function: Callable, lst: list) -> list:
     _validate_list(lst)
 
     filtered_list = [item for item in lst if function(item)]
+    
     return filtered_list
 
 
@@ -89,7 +89,7 @@ def reverse(lst: list) -> list:
     """Reverse the input list and return it."""
     _validate_list(lst)
 
-    reversed_list = lst[::-1]  # Use slicing to reverse the list
+    reversed_list = lst[::-1]  # Slicing to reverse the list
 
     return reversed_list
 
