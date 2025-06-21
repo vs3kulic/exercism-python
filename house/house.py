@@ -35,13 +35,8 @@ def recite(start_verse: int, end_verse: int) -> list[str]:
     if start_verse > end_verse:
         raise ValueError("Start verse must be less than or equal to end verse.")
 
-    # Initialize an empty list to hold the verses
-    verses = []
-
-    # Loop through verses, building them by calling the helper function
-    for verse in range(start_verse, end_verse + 1):
-        single_verse = build_single_verse(verse)
-        verses.append(single_verse)
+    # Generate the verses from start_verse to end_verse using list comprehension
+    verses = [build_single_verse(verse) for verse in range(start_verse, end_verse + 1)]
 
     return verses
 
@@ -54,9 +49,20 @@ def build_single_verse(verse_number: int) -> str:
 
     # Unpack the current item and action from the verse data
     current_item, current_action = verse_data[verse_number]
-    
-    # Recursively build the previous verse and remove the prefix to get the tail
+
+    # Build the previous verse and remove the prefix to get the tail
     previous_verse = build_single_verse(verse_number - 1) # Recursive call to get the previous verse
     previous_tail = previous_verse.removeprefix(PREFIX)
 
-    return f"This is the {current_item} that {current_action} {previous_tail}"
+    # Build the current verse using the current item and action
+    single_verse = f"This is the {current_item} that {current_action} {previous_tail}"
+
+    return single_verse
+
+# Example usage:
+if __name__ == "__main__":
+    # Example of reciting a single verse
+    print(recite(1, 1))  # Output: ["This is the house that Jack built."]
+
+    # Example of reciting multiple verses
+    print(recite(1, 3))  # Output: ["This is the house that Jack built.", "This is the malt that lay in the house that Jack built.", "This is the rat that ate the malt that lay in the house that Jack built."]
