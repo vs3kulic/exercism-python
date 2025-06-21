@@ -60,8 +60,5 @@ def build_single_verse(verse_number: int) -> str:
 
 # Example usage:
 if __name__ == "__main__":
-    # Example of reciting a single verse
-    print(recite(1, 1))  # Output: ["This is the house that Jack built."]
-
-    # Example of reciting multiple verses
-    print(recite(1, 3))  # Output: ["This is the house that Jack built.", "This is the malt that lay in the house that Jack built.", "This is the rat that ate the malt that lay in the house that Jack built."]
+    result = build_single_verse(3)
+    print(result)
