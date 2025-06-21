@@ -30,7 +30,7 @@ def recite(start_verse: int, end_verse: int) -> list[str]:
     return: a list of strings containing the verses from start_verse to end_verse.
     """
     # Validate the input verse numbers
-    if start_verse < MIN_VERSE or start_verse > MAX_VERSE or end_verse < MIN_VERSE or end_verse > MAX_VERSE:
+    if not (MIN_VERSE <= start_verse <= MAX_VERSE and MIN_VERSE <= end_verse <= MAX_VERSE):
         raise ValueError("Verse numbers must be between 1 and 12 inclusive.")
     if start_verse > end_verse:
         raise ValueError("Start verse must be less than or equal to end verse.")
@@ -51,8 +51,7 @@ def build_single_verse(verse_number: int) -> str:
     current_item, current_action = verse_data[verse_number]
 
     # Build the previous verse and remove the prefix to get the tail
-    previous_verse = build_single_verse(verse_number - 1) # Recursive call to get the previous verse
-    previous_tail = previous_verse.removeprefix(PREFIX)
+    previous_tail = build_single_verse(verse_number - 1).removeprefix(PREFIX)
 
     # Build the current verse using the current item and action
     single_verse = f"This is the {current_item} that {current_action} {previous_tail}"
