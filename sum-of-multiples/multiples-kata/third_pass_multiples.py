@@ -1,6 +1,4 @@
-"""A module to calculate the sum of multiples of given numbers below a specified limit.
-This passes 13/16 unit tests, but fails 3 tests related to the validation of inputs.
-"""
+"""A module to calculate the sum of multiples of given numbers below a specified limit."""
 
 def sum_of_multiples(limit: int, multiples: list[int]) -> int:
     """Calculate the sum of all the multiples of given numbers below a specified limit.
@@ -30,9 +28,7 @@ def validate_input(limit: int, multiples: list[int]) -> None:
     raise: ValueError if the input is invalid.
     """
     if limit < 0:
-        raise ValueError("Limit must be a non-negative integer.")
-    if not multiples:
-        raise ValueError("The list of multiples cannot be empty.")
+        raise ValueError("Limit must be a non-negative integer!")
     if any(multiple <= 0 for multiple in multiples):
         raise ValueError("All multiples must be positive integers.")
     if not all(isinstance(multiple, int) for multiple in multiples):
@@ -46,13 +42,10 @@ def calculate_unique_multiples(limit: int, multiples: list[int]) -> set[int]:
     param: multiples: A list of numbers for which to find multiples.
     return: A set of unique multiples of the given numbers below the limit.
     """
-    # Initialize a set to store unique multiples
     unique_multiples = set()
-    
-    # Calculate multiples for each number in the list
+
     for multiple in multiples:
-        for i in range(1, (limit // multiple) + 1):
-            unique_multiples.add(multiple * i)
+        unique_multiples.update(range(multiple, limit, multiple)) # Add multiples directly to the set
 
     return unique_multiples
 
@@ -64,15 +57,10 @@ def sum_unique_multiples(limit: int, unique_multiples: set[int]) -> int:
     param: multiples: A set of numbers for which to find multiples.
     return: The sum of all unique multiples of the given numbers below the limit.
     """
-    # Initialize the sum of multiples
-    points = 0
-
     # Sum the unique multiples
-    for multiple in unique_multiples:
-        if multiple < limit:
-            points += multiple
+    points = [multiple for multiple in unique_multiples if multiple < limit]
 
-    return points
+    return sum(points)
 
 
 # Example usage:

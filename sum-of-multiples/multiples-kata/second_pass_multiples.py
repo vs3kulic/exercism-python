@@ -47,7 +47,8 @@ def calculate_unique_multiples(limit: int, multiples: list[int]) -> set[int]:
     unique_multiples = set()
 
     for multiple in multiples:
-        unique_multiples.update(range(multiple, limit, multiple)) # Add multiples directly to the set
+        for i in range(1, (limit // multiple) + 1):
+            unique_multiples.add(multiple * i)
 
     return unique_multiples
 
@@ -59,10 +60,14 @@ def sum_unique_multiples(limit: int, unique_multiples: set[int]) -> int:
     param: multiples: A set of numbers for which to find multiples.
     return: The sum of all unique multiples of the given numbers below the limit.
     """
-    # Sum the unique multiples
-    points = [multiple for multiple in unique_multiples if multiple < limit]
+    points = 0
 
-    return sum(points)
+    # Sum the unique multiples
+    for multiple in unique_multiples:
+        if multiple < limit:
+            points += multiple
+
+    return points
 
 
 # Example usage:
