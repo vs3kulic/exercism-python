@@ -29,6 +29,8 @@ def validate_input(limit: int, multiples: list[int]) -> None:
     """
     if limit < 0:
         raise ValueError("Limit must be a non-negative integer!")
+    if not multiples:
+        raise ValueError("The list of multiples cannot be empty.")
     if any(multiple <= 0 for multiple in multiples):
         raise ValueError("All multiples must be positive integers.")
     if not all(isinstance(multiple, int) for multiple in multiples):
@@ -45,7 +47,7 @@ def calculate_unique_multiples(limit: int, multiples: list[int]) -> set[int]:
     unique_multiples = set()
 
     for multiple in multiples:
-        unique_multiples.update(range(multiple, limit, multiple)) # Add multiples directly to the set
+        unique_multiples.update(range(multiple, limit, multiple)) # Add multiples directly to the set, range(start, stop, step)
 
     return unique_multiples
 
