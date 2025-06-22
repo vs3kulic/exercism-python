@@ -1,9 +1,11 @@
 """A module to recite the nursery rhyme 'This is the House that Jack Built'."""
 # Caching mechanism to avoid recomputing verses
-verse_cache = {}
+verse_cache: dict[int, str] = {
+    1: "This is the house that Jack built." # First verse is pre-populated (hardcoded)
+}
 
 # Dictionary of tuples to hold the verse data
-verse_data = {
+verse_data: dict[int, tuple[str, str]] = {
     1: ("house", "Jack built"),
     2: ("malt", "lay in"),
     3: ("rat", "ate"),
@@ -50,10 +52,6 @@ def build_single_verse(verse_number: int) -> str:
     if verse_number in verse_cache:
         return verse_cache[verse_number]
 
-    # Base case for recursion
-    if verse_number == 1:
-        return "This is the house that Jack built."
-
     # Unpack the current item and action from the verse data
     current_item, current_action = verse_data[verse_number]
 
@@ -70,5 +68,5 @@ def build_single_verse(verse_number: int) -> str:
 
 # Example usage:
 if __name__ == "__main__":
-    result = build_single_verse(3)
+    result = recite(1, 3)
     print(result)
