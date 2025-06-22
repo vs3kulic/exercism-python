@@ -1,4 +1,4 @@
-"""This module contains the first pass implementation of the scrabble score kata."""
+"""This module contains the implementation of the scrabble score kata."""
 
 # Define the mapping for letter scores
 SCORE_GROUPS = {
@@ -18,20 +18,13 @@ def score(word: str) -> int:
     return: int - The score of the word.
     """
     # Validate the input
-    validate_input(word)
+    if not word or not isinstance(word, str):
+        return 0
 
     # Calculate the score by summing the scores of each letter
     word_score = sum(letter_scoring(letter) for letter in word.lower())
 
     return word_score
-
-# Helper function to validate input
-def validate_input(word):
-    """Validate the input word."""
-    if not word or not isinstance(word, str):
-        return 0
-
-    return word
 
 # Helper function to calculate the score for a letter
 def letter_scoring(letter: str) -> int:
