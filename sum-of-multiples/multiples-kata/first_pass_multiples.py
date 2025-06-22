@@ -17,8 +17,21 @@ def sum_of_multiples(limit: int, multiples: list[int]) -> int:
     if not all(isinstance(multiple, int) for multiple in multiples):
         raise ValueError("All multiples must be integers.")
 
+    # Initialize the sum of multiples
+    points = 0
 
-    # Calulate the sum of multiples
-    points = 0 # Initialize the sum of multiples to zero (placeholder)
+    # Calculate the sum of multiples
+    for multiple in multiples:
+        while points < limit:
+            points += multiple
 
     return points
+
+
+# Example usage:
+if __name__ == "__main__":
+    try:
+        result = sum_of_multiples(10, [2, 3])
+        print(f"The sum of multiples is: {result}")
+    except ValueError as e:
+        print(f"Error: {e}")
