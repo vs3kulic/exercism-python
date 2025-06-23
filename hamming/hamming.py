@@ -15,7 +15,7 @@ def distance(strand_a: str, strand_b: str) -> int:
     return hamming_distance
 
 # Helper function to validate the strands
-def validate_strands(strand_a, strand_b):
+def validate_strands(strand_a: str, strand_b: str) -> bool:
     """Validate the input strands for Hamming distance calculation."""
     if len(strand_a) != len(strand_b):
         raise ValueError("Strands must be of equal length.")
