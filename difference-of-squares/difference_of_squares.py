@@ -7,9 +7,7 @@ def square_of_sum(number: int) -> int:
     return: int: The square of the the sum.
     """
     validate_input(number)
-
-    _sum = sum(_number for _number in range(1, number + 1))
-    square_sum = _sum ** 2
+    square_sum = sum(_number for _number in range(1, number + 1)) ** 2
 
     return square_sum
 
@@ -21,7 +19,6 @@ def sum_of_squares(number: int) -> int:
     return: int: The sum of the squares.
     """
     validate_input(number)
-
     sum_squares = sum(_number ** 2 for _number in range(1, number + 1))
 
     return sum_squares
@@ -30,7 +27,6 @@ def sum_of_squares(number: int) -> int:
 def difference_of_squares(number: int) -> int:
     """Compute the difference between the square of the sum and the sum of the squares."""
     validate_input(number)
-
     squares_difference = square_of_sum(number) - sum_of_squares(number)
 
     return squares_difference
