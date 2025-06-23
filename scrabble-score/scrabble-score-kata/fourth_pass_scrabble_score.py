@@ -21,7 +21,8 @@ def score(word: str) -> int:
     if not word or not isinstance(word, str):
         return 0
 
-    # Calculate the score by summing the scores of each letter
+    # Calculate the score by summing the scores of each letter, using get function for safety
+    # Generator expression returns a lazy iterator that yields each letter's score when consumed
     word_score = sum(LETTER_SCORES.get(letter, 0) for letter in word.lower())
 
     return word_score
