@@ -15,9 +15,9 @@ def transpose(text: str) -> str:
     padded_lines = zip_longest(*lines, fillvalue='-')
 
     # Join the characters from each line, stripping only trailing '-' characters
-    joined_lines = [''.join(line).rstrip('-') for line in padded_lines]
+    joined_lines = (''.join(line).rstrip('-') for line in padded_lines)
 
-    # Convert remaining '-' back to spaces
+    # Join the transposed lines into a single string, replacing '-' with spaces
     transposed_lines = '\n'.join(joined_lines).replace('-', ' ')
 
     return transposed_lines
