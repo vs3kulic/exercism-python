@@ -1,12 +1,11 @@
 """This module demonstrates a solution for the Proverb exercise."""
 
-def proverb(*item, qualifier=None):
+def proverb(*item: str, qualifier=None) -> list[str]:
     """Return a proverb as a list of strings.
     
     param item: a variable number of string arguments representing items in the proverb.
     param qualifier: an optional string to qualify the first item in the final line.
     return: a list of strings representing the lines of the proverb.
-    
     """
     lines = [f"For want of a {a} the {b} was lost." for a, b in zip(item, item[1:])]
 
@@ -18,8 +17,9 @@ def proverb(*item, qualifier=None):
 
 def main():
     """Main function to demonstrate the proverb function."""
-    my_proverb = proverb("nail", "shoe", "horse", "rider", "message", "battle", "kingdom", qualifier="horseshoe")
-    print(my_proverb)
+    items = ["nail", "shoe", "horse", "rider", "message", "battle", "kingdom"]
+    my_proverb = proverb(*items, qualifier="horseshoe")
+    print("\n".join(my_proverb))
 
 if __name__ == "__main__":
     main()
