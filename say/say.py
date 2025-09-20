@@ -36,12 +36,12 @@ def say(number: int) -> str:
     for value, group in sorted(GROUPS.items(), reverse=True):
         if number >= value:
             count, remainder = divmod(number, value)
-            return say(count) + f" {group}" + ("" if remainder == 0 else " " + say(remainder))
-    return ""
+            remainder_text = "" if remainder == 0 else " " + say(remainder)
+            return say(count) + f" {group}" + remainder_text
 
 def main():
     """Main function to demonstrate the say function."""
-    number = 100
+    number = 9999
     spoken = say(number)
     print(spoken)
 
