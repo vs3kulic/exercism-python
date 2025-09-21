@@ -30,18 +30,23 @@ def say(number: int) -> str:
             return TEENS[number]
         if 20 <= number < 100:
             ten, one = divmod(number, 10)
-            return TENS[ten] + ("" if one == 0 else f"-{ONES[one]}")
+            result = TENS[ten]
+            if one:
+                result += f"-{ONES[one]}"
+            return result
 
     # Recursive case - find the largest group and recurse
     for value, group in sorted(GROUPS.items(), reverse=True):
         if number >= value:
             count, remainder = divmod(number, value)
-            remainder_text = "" if remainder == 0 else " " + say(remainder)
-            return say(count) + f" {group}" + remainder_text
+            result = f"{say(count)} {group}"
+            if remainder:
+                result += f" {say(remainder)}"
+            return result
 
 def main():
     """Main function to demonstrate the say function."""
-    number = 9999
+    number = 122333
     spoken = say(number)
     print(spoken)
 
