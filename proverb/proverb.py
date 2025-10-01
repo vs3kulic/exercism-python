@@ -3,9 +3,11 @@
 def proverb(*item: str, qualifier=None) -> list[str]:
     """Return a proverb as a list of strings.
     
-    param item: a variable number of string arguments representing items in the proverb.
-    param qualifier: an optional string to qualify the first item in the final line.
-    return: a list of strings representing the lines of the proverb.
+    :param item: a variable number of string arguments representing items in the proverb.
+    :type item: str
+    :param qualifier: an optional string to qualify the last item in the proverb.
+    :type qualifier: str | None
+    :return: a list of strings representing the lines of the proverb.
     """
     lines = [f"For want of a {a} the {b} was lost." for a, b in zip(item, item[1:])]
 
