@@ -35,7 +35,6 @@ def modifier(ability_score: int) -> int:
 # ----------------------------
 # DEMONSTRATION
 # ----------------------------
-
 def main():
     """Main function to demonstrate the Character class."""
     char = Character()
