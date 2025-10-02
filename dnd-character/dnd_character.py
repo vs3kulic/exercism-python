@@ -11,7 +11,6 @@ DICE_MAX = 6 # 6-sided dice
 
 class Character:
     """Dungeons & Dragons character with abilities and hit points."""
-
     def __init__(self):
         self.strength = self.ability() # set attr value by calling (class) method
         self.dexterity = self.ability()
