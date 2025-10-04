@@ -20,10 +20,17 @@ class Garden:
 
     def plants(self, student: str) -> list[str]:
         """Return the list of plants for the given student."""
-        rows = self.diagram.split("\n") # split diagram into rows, returns list of strings
-        student_index = self.students.index(student) # find index of student in sorted list
+        # Parse the diagram into rows, return list of strings
+        rows = self.diagram.split("\n")
 
+        # Find index of student in sorted list
+        student_index = self.students.index(student)
+
+        # Gather plants for both rows
         plants = []
-        # TODO: calculate plant indices, stores as list of integers
-        # TODO: gather plants for both rows
+        for row in rows:
+            plant_indices = [2 * student_index, 2 * student_index + 1]
+            for plant_index in plant_indices:
+                plant_code = row[plant_index]
+                plants.append(DIAGRAM_ENCODING[plant_code])
         return plants
