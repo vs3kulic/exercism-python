@@ -14,9 +14,16 @@ DIAGRAM_ENCODING = {
 
 class Garden:
     """A class representing a kindergarten garden with students and their plants."""
-    def __init__(self, diagram, students):
-        pass
+    def __init__(self, diagram: str, students: list[str]) -> None:
+        self.diagram = diagram
+        self.students = sorted(students) if students else sorted(STUDENT_NAMES)
 
-    def plants(self, student) -> list[str]:
+    def plants(self, student: str) -> list[str]:
         """Return the list of plants for the given student."""
-        pass
+        rows = self.diagram.split("\n") # split diagram into rows, returns list of strings
+        student_index = self.students.index(student) # find index of student in sorted list
+
+        plants = []
+        # TODO: calculate plant indices, stores as list of integers
+        # TODO: gather plants for both rows
+        return plants
