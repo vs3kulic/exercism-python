@@ -24,7 +24,7 @@ class Matrix:
         :rtype: list[int]
         """
         matrix = self.parse_matrix()
-        row = matrix[index - 1]
+        row = matrix[index-1]
         return row
 
     def column(self, index: int) -> list[int]:
