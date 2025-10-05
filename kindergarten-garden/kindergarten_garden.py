@@ -23,13 +23,13 @@ class Garden:
         # Parse the diagram into rows, return list of strings
         rows = self.diagram.split("\n")
 
-        # Find index of student in sorted list
+        # Find index of student in sorted list, determine their plant positions
         student_index = self.students.index(student)
-
+        plant_indices = [2 * student_index, 2 * student_index + 1]
+        
         # Gather plants for both rows
         plants = []
         for row in rows:
-            plant_indices = [2 * student_index, 2 * student_index + 1]
             for plant_index in plant_indices:
                 plant_code = row[plant_index]
                 plants.append(PLANTS[plant_code])
