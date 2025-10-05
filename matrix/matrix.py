@@ -24,11 +24,8 @@ class Matrix:
         :rtype: list[int]
         """
         matrix = self.parse_matrix()
-
-        for row in matrix:
-            if matrix.index(row) == index - 1:
-                return row
-        return []
+        row = matrix[index - 1]
+        return row
 
     def column(self, index: int) -> list[int]:
         """Return the column at the given 1-based index.
@@ -38,7 +35,9 @@ class Matrix:
         :return: list of integers in the specified column
         :rtype: list[int]
         """
-        pass
+        matrix = self.parse_matrix()
+        column = [row[index-1] for row in matrix]
+        return column
 
 def main():
     """Main function to demonstrate the Matrix class."""
@@ -47,7 +46,7 @@ def main():
     print("Matrix:")
     print(matrix.parse_matrix())
     print("Row 2:", matrix.row(2))
-    # print("Column 3:", matrix.column(3))
+    print("Column 3:", matrix.column(3))
 
 if __name__ == "__main__":
     main()
