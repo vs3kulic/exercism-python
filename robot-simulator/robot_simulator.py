@@ -30,30 +30,25 @@ DIRECTIONS_RIGHT = {
 
 class Robot:
     """A class to simulate a robot on a grid."""
-    def __init__(self, direction: str=NORTH, x_pos: int=0, y_pos: int=0):
+    def __init__(self, direction: str = NORTH, x_pos: int = 0, y_pos: int = 0):
         self.direction = direction
         self.coordinates = (x_pos, y_pos)
 
     def move(self, instructions: str) -> None:
         """Move the robot based on the given instructions."""
         for instruction in instructions:
-            if not instruction in "RLA":
-                raise ValueError(f"Invalid instruction: {instruction}. Valid instructions: 'R', 'L', and 'A'.")
             if instruction == "R":
-                self._turn_right()
-            if instruction == "L":
-                self._turn_left()
-            if instruction == "A":
+                self._turn(DIRECTIONS_RIGHT)
+            elif instruction == "L":
+                self._turn(DIRECTIONS_LEFT)
+            elif instruction == "A":
                 self._advance()
+            else:
+                raise ValueError(f"Invalid instruction: {instruction}!")
 
-    def _turn_right(self) -> None:
-        """Turn the robot 90 degrees to the right."""
-        # Update the robot's direction
-        self.direction = DIRECTIONS_RIGHT[self.direction]
-
-    def _turn_left(self) -> None:
-        """Turn the robot 90 degrees to the left."""
-        self.direction = DIRECTIONS_LEFT[self.direction]
+    def _turn(self, direction_mapping: dict) -> None:
+        """Turn the robot based on the given direction mapping."""
+        self.direction = direction_mapping[self.direction]
 
     def _advance(self) -> None:
         """Move the robot one unit forward in the direction it is currently facing."""
