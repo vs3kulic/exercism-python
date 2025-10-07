@@ -26,7 +26,7 @@ class Garden:
         # Find index of student in sorted list, determine their plant positions
         student_index = self.students.index(student)
         plant_indices = [2 * student_index, 2 * student_index + 1]
-        
+
         # Gather plants for both rows
         plants = []
         for row in rows:
