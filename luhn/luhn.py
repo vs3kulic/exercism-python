@@ -2,7 +2,7 @@
 
 class Luhn:
     """A class to validate numbers using the Luhn algorithm."""
-    def __init__(self, card_num):
+    def __init__(self, card_num: str):
         self.card_num = card_num
 
     def valid(self):
