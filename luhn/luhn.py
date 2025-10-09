@@ -7,16 +7,15 @@ class Luhn:
 
     def valid(self) -> bool:
         """Validate the card number using the Luhn algorithm."""
-        # Preprocess the input: replace spaces and strip leading or trailing spaces
-        string = self.card_num.replace(" ", "").strip()
+        # Preprocess the input: remove spaces
+        string = self.card_num.replace(" ", "")
 
-        # Check for invalid input, return False if invalid (as per spec)
+        # Check for invalid input, return False
         if len(string) <= 1 or not string.isdigit():
             return False
 
-        # Convert string to a list of integers and reverse it
-        digits = [int(digit) for digit in string]
-        digits.reverse()
+        # Convert reversed string to a list of integers
+        digits = [int(digit) for digit in reversed(string)]
 
         # Apply the Luhn algorithm
         total_sum = 0
