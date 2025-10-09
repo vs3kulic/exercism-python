@@ -6,8 +6,6 @@ EAST = 1
 SOUTH = 2
 WEST = 3
 
-DIRECTIONS = [NORTH, EAST, SOUTH, WEST]
-
 DIRECTION_DELTAS = [
     (0, 1),   # NORTH: y increases
     (1, 0),   # EAST: x increases
@@ -18,7 +16,7 @@ DIRECTION_DELTAS = [
 class Robot:
     """A class to simulate a robot on a grid."""
     def __init__(self, direction = NORTH, x_pos: int = 0, y_pos: int = 0):
-        self.direction = DIRECTIONS.index(direction)
+        self.direction = direction
         self.coordinates = (x_pos, y_pos)
 
     def move(self, instructions: str) -> None:
@@ -45,7 +43,7 @@ class Robot:
         :type step: int
         :returns: None
         """
-        self.direction = (self.direction + step) % len(DIRECTIONS)
+        self.direction = (self.direction + step) % len(DIRECTION_DELTAS) # to avoid magic number
 
     def _advance(self) -> None:
         """Move the robot one unit forward in the direction it is currently facing."""
