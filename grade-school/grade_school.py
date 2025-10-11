@@ -2,31 +2,29 @@
 
 class School(object):
     """The School class manages students and their grades."""
-    def __init__(self, name: str):
+    def __init__(self):
         """Initialize a School object."""
         self.grades = {} # dict key=grade, value=list of names
-        self.name = name
         self.result = []
 
     def add_student(self, name: str, grade: int) -> bool:
-        """Try to add a student."""
-        newcomer = True
-
+        """Tries to add a student to the school roster.
+        
+        :param name: The student's name
+        :type name: str
+        :param grade: The student's grade
+        :type grade: int
+        :returns: True if the student was added, False if they were already enrolled
+        """
         # Check if the student is already in the school (any grade)
-        for students in self.grades.values():
-            if name in students:
-                newcomer = False
-                break
+        if any(name in students for students in self.grades.values()):
+            self.result.append(False)
+            return False
 
-        # If the student is new, add them to the specified grade
-        if newcomer:
-            if grade not in self.grades:
-                self.grades[grade] = []
-            self.grades[grade].append(name)
-
-        # Remember the result
-        self.result.append(newcomer)
-        return newcomer
+        # Add the student to the specified grade
+        self.grades.setdefault(grade, []).append(name) # check if grade exists, if not create it and set to empty list, then append name
+        self.result.append(True)
+        return True
 
     def grade(self, num: int) -> list:
         """Return a sorted list of students in this grade.
@@ -35,7 +33,7 @@ class School(object):
         :type num: int
         :returns: A sorted list of student names in the specified grade
         """
-        students_in_grade = self.grades.get(num, [])
+        students_in_grade = self.grades.get(num, []) # get list of students in the grade, or empty list if grade doesn't exist
         return sorted(students_in_grade)
 
     def roster(self) -> list:
