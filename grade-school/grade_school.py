@@ -1,69 +1,60 @@
 """This module implements a simple school roster system."""
 
-class School(object):
+class School:
     """The School class manages students and their grades."""
     def __init__(self):
-        """Initialize a School object."""
-        self.grades = {} # dict key=grade, value=list of names
-        self.result = []
+        self.school = {}
+        self.add = []
 
-    def add_student(self, name: str, grade: int) -> bool:
-        """Tries to add a student to the school roster.
+    def add_student(self, name: str, grade: int) -> None:
+        """Add a student to the school roster.
         
         :param name: The student's name
         :type name: str
         :param grade: The student's grade
         :type grade: int
-        :returns: True if the student was added, False if they were already enrolled
+        :returns: None
         """
-        # Check if the student is already in the school (any grade)
-        if any(name in students for students in self.grades.values()):
-            self.result.append(False)
-            return False
+        if name not in self.roster():
+            self.school[grade] = self.school.get(grade, []) + [name]
+            self.add.append(True)
+        else:
+            self.add.append(False)
 
-        # Add the student to the specified grade
-        self.grades.setdefault(grade, []).append(name) # check if grade exists, if not create it and set to empty list, then append name
-        self.result.append(True)
-        return True
-
-    def grade(self, num: int) -> list:
-        """Return a sorted list of students in this grade.
-        
-        :param num: The grade number
-        :type num: int
-        :returns: A sorted list of student names in the specified grade
-        """
-        students_in_grade = self.grades.get(num, []) # get list of students in the grade, or empty list if grade doesn't exist
-        return sorted(students_in_grade)
-
+    def added(self):
+        """Track which students were successfully added."""
+        return self.add
+    
     def roster(self) -> list:
         """List all the students in the school in order."""
         # Get the grades in sorted order
-        sorted_grades = sorted(self.grades.keys())
+        sorted_grades = sorted(self.school.keys())
 
         # Collect students from each grade in sorted order
         students_by_grade = []
         for grade in sorted_grades:
-            students_by_grade.append(self.grade(grade))
+            sorted_students = sorted(self.school[grade])
+            students_by_grade.extend(sorted_students)
 
-        # Flatten the list of lists into a single list
-        all_students = []
-        for grade_students in students_by_grade:
-            all_students.extend(grade_students)
+        return students_by_grade
 
-        return all_students
-
-    def added(self):
-        """Track which students were successfully added."""
-        return self.result
+    def grade(self, grade_number: int) -> list:
+        """Return a sorted list of students in this grade.
+        
+        :param grade_number: The grade number
+        :type grade_number: int
+        :returns: A sorted list of student names in the specified grade
+        """
+        return sorted(self.school.get(grade_number, []))
 
 def main():
     """Main function to demonstrate the School class."""
-    school = School("Hogwarts")
-    school.add_student(name="Harry", grade=5)
-    school.add_student(name="Hermione", grade=5)
+    school = School()
+    school.add_student(name="Harry", grade=3)
+    school.add_student(name="Ron", grade=3)
     school.add_student(name="Ron", grade=5)
     school.add_student(name="Draco", grade=5)
+    print(f"Students in grade 3: {school.grade(3)}")
     print(f"Students in grade 5: {school.grade(5)}")
     print(f"Full roster: {school.roster()}")
     print(f"Addition results: {school.added()}")
