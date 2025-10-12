@@ -25,12 +25,12 @@ class School:
 
     def added(self):
         """Track which students were successfully added."""
-        return self.add
+        return self.add.copy()  # Return a shallow copy of the list
 
     def roster(self) -> list:
         """List all the students in the school in order."""
         # Get the grades in sorted order
-        sorted_grades = sorted(self.school.keys())
+        sorted_grades = sorted(self.school) # sorts the keys of the dictionary
 
         # Collect students from each grade in sorted order, flattening the resulting list
         students_by_grade = []
