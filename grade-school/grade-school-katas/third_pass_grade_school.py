@@ -5,6 +5,7 @@ class School:
     def __init__(self):
         self.school = {}
         self.add = []
+        self.all_students = set()  # Set to track all student names for efficient lookup
 
     def add_student(self, name: str, grade: int) -> None:
         """Add a student to the school roster.
@@ -15,12 +16,12 @@ class School:
         :type grade: int
         :returns: None
         """
-        # Check if the student is already in the school (any grade)
-        if any(name in students for students in self.school.values()):
+        if name in self.all_students:
             self.add.append(False)
         else:
             students = self.school.setdefault(grade, [])
             students.append(name) # Add the student to the list for the grade
+            self.all_students.add(name)  # Add to the set
             self.add.append(True)
 
     def added(self):
