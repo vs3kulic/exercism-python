@@ -59,7 +59,7 @@ class School(object):
 
 def main():
     """Main function to demonstrate the School class."""
-    school = School("Hogwarts")
+    school = School()
     school.add_student(name="Harry", grade=5)
     school.add_student(name="Hermione", grade=5)
     school.add_student(name="Ron", grade=5)
