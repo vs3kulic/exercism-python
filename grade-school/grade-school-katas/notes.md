@@ -62,3 +62,20 @@ This function generates a complete list of all students in the school, sorted by
 This function returns a sorted list of students in a specific grade. The approach involves:
 - **`dict.get()`**: Retrieves the list of students for the specified grade. If the grade does not exist, it returns an empty list as the default value, avoiding a `KeyError`.
 - **`sorted()`**: Ensures the list of students is returned in alphabetical order.
+
+
+    def grade(self, grade_number: int) -> list:
+        """Return a sorted list of students in this grade.
+        
+        :param grade_number: The grade number
+        :type grade_number: int
+        :returns: A sorted list of student names in the specified grade
+        :rtype: list
+        """
+        # Explicit sentinel values for name range
+        LOW_NAME = "" # smallest possible string in lexicographical order
+        HIGH_NAME = chr(0x10FFFF)  # Highest possible Unicode character
+
+        start = bisect.bisect_left(self.students, (grade_number, LOW_NAME)) # find start index for the grade
+        end = bisect.bisect_right(self.students, (grade_number, HIGH_NAME)) # find end index for the grade
+        return [name for _, name in self.students[start:end]]
