@@ -1,4 +1,5 @@
 """This module provides a function to find the nth prime number using an infinite generator."""
+from itertools import count
 
 def primes_generator():
     """Infinitely generate prime numbers using trial division.
@@ -7,11 +8,10 @@ def primes_generator():
     :rtype: Generator[int]
     """
     primes = []
-    n = 2
-    while True:
-        if all(n % p > 0 for p in primes) and (primes.append(n) or True):
+    for n in count(2):
+        if all(n % p > 0 for p in primes):
+            primes.append(n)
             yield n
-        n += 1
 
 def prime(number):
     """Return the nth prime number using an infinite prime generator.

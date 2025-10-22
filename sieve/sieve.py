@@ -21,7 +21,7 @@ def primes(limit: int) -> list[int]:
 
 def main():
     """Main function to demonstrate the primes function."""
-    limit = 13
+    limit = 59
     print(f"Primes up to {limit}: {primes(limit)}")
 
 if __name__ == "__main__":

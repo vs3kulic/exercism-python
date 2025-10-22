@@ -28,14 +28,10 @@ def prime(number):
     :rtype: int
     """
     # Raise an error for invalid input
-    if number == 0:
+    if number < 1:
         raise ValueError("there is no zeroth prime")
 
-    # Quick return for the first prime
-    if number == 1:
-        return 2
-
-    # Generate primes until we have at least 'number' primes
+    # Calculate primes until we have at least 'number' primes
     limit = 15  # Initial arbitrary limit
     primes_list = []
     while len(primes_list) < number:

@@ -1,5 +1,7 @@
 """This module provides a function to find the nth prime number."""
 
+from math import log
+
 def primes(limit: int) -> list[int]:
     """Determine the prime numbers up to a given limit.
     
@@ -31,22 +33,26 @@ def prime(number):
     if number == 0:
         raise ValueError("there is no zeroth prime")
 
-    # Quick return for the first prime
-    if number == 1:
-        return 2
-
-    # Generate primes until we have at least 'number' primes
-    limit = 15  # Initial arbitrary limit
-    primes_list = []
+    # Use prime number theorem to estimate upper bound
+    # For n >= 6, the nth prime is less than n * (log(n) + log(log(n)))
+    if number < 6:
+        limit = 15
+    else:
+        limit = int(number * (log(number) + log(log(number))) * 1.3)
+    
+    primes_list = primes(limit)
+    
+    # If estimation was too low, double until we have enough
     while len(primes_list) < number:
+        limit *= 2
         primes_list = primes(limit)
-        limit *= 2  # Double the limit and try again if not enough primes found
+    
     return primes_list[number - 1]
 
 
 def main():
     """Main function to demonstrate the prime function."""
-    n = 10001
+    n = 4
     print(f"The {n}th prime number is: {prime(n)}")
 
 if __name__ == "__main__":
