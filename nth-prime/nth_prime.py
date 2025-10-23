@@ -33,20 +33,12 @@ def prime(number):
     if number == 0:
         raise ValueError("there is no zeroth prime")
 
-    # Use prime number theorem to estimate upper bound
-    # For n >= 6, the nth prime is less than n * (log(n) + log(log(n)))
-    if number < 6:
-        limit = 15
-    else:
-        limit = int(number * (log(number) + log(log(number))) * 1.3)
-    
-    primes_list = primes(limit)
-    
-    # If estimation was too low, double until we have enough
+    # Generate primes until we have at least 'number' primes
+    limit = 15  # Initial arbitrary limit
+    primes_list = []
     while len(primes_list) < number:
-        limit *= 2
         primes_list = primes(limit)
-    
+        limit *= 2  # Double the limit and try again if not enough primes found
     return primes_list[number - 1]
 
 
