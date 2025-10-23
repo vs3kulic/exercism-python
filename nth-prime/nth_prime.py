@@ -1,7 +1,5 @@
 """This module provides a function to find the nth prime number."""
 
-from math import log
-
 def primes(limit: int) -> list[int]:
     """Determine the prime numbers up to a given limit.
     
