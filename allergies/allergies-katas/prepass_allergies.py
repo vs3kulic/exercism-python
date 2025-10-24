@@ -25,6 +25,14 @@ ALLERGEN_SCORES = {
 # The method return a bool indicating whether the person is allergic to the specified item
 # The property returns a list[str] of allergens matched to the allergy score
 
+# -------------------
+# Method Definition
+# -------------------
+# First, we will check if the item is in the allergen list.
+# If not, return False.
+# If yes, continue with the allergy check logic:
+# - 
+
 # -------------------------------
 # Explanation of Property Usage
 # -------------------------------
