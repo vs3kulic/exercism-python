@@ -11,6 +11,7 @@ ALLERGENS = {
     "eggs": 1,
 }
 
+
 class Allergies:
     """Determines allergies based on a given score."""
 
@@ -40,9 +41,7 @@ class Allergies:
         :rtype: bool
         """
         # Check if the item is a known allergen
-        if item.lower() not in ALLERGENS:
-            return False
-        return item.lower() in self._build_allergy_list()
+        return item in self._build_allergy_list()
 
     @property
     def lst(self):

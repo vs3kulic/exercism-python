@@ -31,7 +31,6 @@ ALLERGEN_SCORES = {
 # First, we will check if the item is in the allergen list.
 # If not, return False.
 # If yes, continue with the allergy check logic:
-# - 
 
 # -------------------------------
 # Explanation of Property Usage
