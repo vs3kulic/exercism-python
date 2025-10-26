@@ -1,4 +1,4 @@
-"""This module contains dictionary manipulation methods for Mecha Munch."""
+"""This module contains dictionary manipulation methods for Mecha Munch Management."""
 
 def add_item(current_cart: dict, items_to_add: list[str]) -> dict:
     """Add items to shopping cart.
@@ -91,19 +91,21 @@ def send_to_store(cart: dict, isle_mapping: dict) -> dict:
     # Create an empty fulfillment dictionary
     fulfill_cart = {}
 
-    # Iterate over the cart and concatenate values with the isle mapping
+    # Iterate over cart, concatenate values with isle mapping
     for key in sorted(cart, reverse = True):
         fulfill_cart[key] = [cart[key]] + isle_mapping[key]
 
     return fulfill_cart
 
-
-def update_store_inventory(fulfillment_cart, store_inventory):
+def update_store_inventory(fulfillment_cart: dict, store_inventory: dict) -> dict:
     """Update store inventory levels with user order.
 
-    :param fulfillment_cart: dict - fulfillment cart to send to store.
-    :param store_inventory: dict - store available inventory
-    :return: dict - store_inventory updated.
+    :param fulfillment_cart: users fulfillment cart.
+    :type fulfillment_cart: dict
+    :param store_inventory: store available inventory.
+    :type store_inventory: dict
+    :return: store_inventory updated.
+    :rtype: dict
     """
     # Create a copy of the store inventory
     update_inventory = store_inventory.copy()
@@ -112,7 +114,7 @@ def update_store_inventory(fulfillment_cart, store_inventory):
     for key, values in fulfillment_cart.items():
         update_inventory[key][0] -= values[0]
 
-    # Check if the inventory level is zero or below and update accordingly
+        # After updating, check the inventory level
         if update_inventory[key][0] <= 0:
             update_inventory[key][0] = "Out of Stock"
 
@@ -122,14 +124,17 @@ def update_store_inventory(fulfillment_cart, store_inventory):
 def main():
     """Main function to demonstrate dictionary methods."""
     # Demonstrate recipe update
-    ideas = {'salad': ['lettuce', 'tomato'], 'sandwich': ['bread', 'ham']}
+    ideas = {
+        "salad": ["lettuce", "tomato"], 
+        'sandwich': ["bread", "ham"]
+    }
     recipe_updates = (
-        ('salad', ['lettuce', 'tomato', 'cucumber']),
-        ('sandwich', ['bread', 'turkey'])
+        ("salad", ["lettuce", "tomato", "cucumber"]),
+        ("sandwich", ["bread", "turkey"])
     )
     updated_ideas = update_recipes(ideas, recipe_updates)
     print(f"Updated Recipe Ideas: {updated_ideas}")
-    
+
     # Demonstrate sending to store
     cart = {"apple": 5, "steak": 3}
     isle_mapping = {
@@ -138,7 +143,7 @@ def main():
     }
     fulfillment_cart = send_to_store(cart, isle_mapping)
     print(f"Fulfillment cart: {fulfillment_cart}")
-    
+
     # Demonstrate updating store inventory
     fulfill_cart = {
         "apple": [5, "Aisle 1", False],
