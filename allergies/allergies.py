@@ -14,11 +14,11 @@ ALLERGIES = {
 
 class Allergies:
     """Determines allergies based on a given score."""
-    def __init__(self, score):
+    def __init__(self, score: int) -> None:
         """Initialize the Allergies instance with a score."""
         self.score = score
 
-    def allergic_to(self, item):
+    def allergic_to(self, item: str) -> bool:
         """Check if allergic to a specific item 
         using bitwise AND operation.
         
@@ -30,7 +30,7 @@ class Allergies:
         return self.score & ALLERGIES[item] != 0
 
     @property
-    def lst(self):
+    def lst(self) -> list[str]:
         """Get the list of allergies based on the score."""
         return [allergy for allergy in ALLERGIES
                 if self.allergic_to(allergy)
