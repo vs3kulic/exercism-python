@@ -4,10 +4,11 @@ def add_item(current_cart: dict, items_to_add: list[str]) -> dict:
     """Add items to shopping cart.
     
     :param current: the current shopping cart dict.
-    :type current: dict
+    :type current: dict[str, int]
     :param items_to_add: iterable of items to add to cart.
     :type items_to_add: list[str]
     :return: updated shopping cart dictionary.
+    :rtype: dict[str, int]
     """
     # Copy the current cart
     updated_cart = current_cart.copy()
@@ -24,7 +25,7 @@ def read_notes(notes: list[str]) -> dict:
     :param notes: the user notes listing items to add to cart.
     :type notes: list[str]
     :return: the resulting shopping cart.
-    :rtype: dict
+    :rtype: dict[str, int]
     """
     # Create a new cart dictionary
     new_cart = {}
@@ -39,12 +40,11 @@ def update_recipes(ideas: dict, recipe_updates: dict) -> dict:
     """Update the recipe ideas dictionary.
 
     :param ideas: current recipe ideas, with str keys and list[str] values.
-    :type ideas: dict
-    :param recipe_updates: updates to apply to the recipe ideas; may be a dict
-        or a tuple of (key, value) tuples as provided by some test data.
-    :type recipe_updates: dict | tuple[tuple[str, list[str]], ...]
+    :type ideas: dict[str, list[str]]
+    :param recipe_updates: updates to apply to the recipe ideas.
+    :type recipe_updates: dict[str, list[str]] | tuple[tuple[str, list[str]], ...]
     :return: updated recipe ideas.
-    :rtype: dict
+    :rtype: dict[str, list[str]]
     """
     # Copy the current ideas
     new_ideas = ideas.copy()
@@ -62,9 +62,9 @@ def sort_entries(cart: dict) -> dict:
     """Sort a users shopping cart in alphabetically order.
 
     :param cart: users shopping cart.
-    :type cart: dict
+    :type cart: dict[str, int]
     :return: sorted shopping cart.
-    :rtype: dict
+    :rtype: dict[str, int]
     """
     # Create an empty dictionary
     sorted_cart = {}
@@ -101,11 +101,11 @@ def update_store_inventory(fulfillment_cart: dict, store_inventory: dict) -> dic
     """Update store inventory levels with user order.
 
     :param fulfillment_cart: users fulfillment cart.
-    :type fulfillment_cart: dict
+    :type fulfillment_cart: dict[str, list[int, str, bool]]
     :param store_inventory: store available inventory.
-    :type store_inventory: dict
+    :type store_inventory: dict[str, list[int, str, bool]]
     :return: store_inventory updated.
-    :rtype: dict
+    :rtype: dict[str, list[int, str, bool]]
     """
     # Create a copy of the store inventory
     update_inventory = store_inventory.copy()
