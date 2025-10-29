@@ -96,7 +96,7 @@ Result:   000000000
 - Position 2: `1 & 0 = 0` ← 2 has implicit 0 here
 - All other positions: `1 & 0 = 0` ← All implicit zeros
 
-### The Genius of This System
+### The Bit Mask Concept
 
 Each allergy value (power of 2) acts as a **bit mask**:
 
@@ -222,14 +222,14 @@ The Exercise is Designed for Bitwise Operations.
     - Each allergy "owns" exactly one bit position
     - No two allergies can interfere with each other
 
-### When Bitwise Operations Shine
+### Use-cases for Bitwise Operations
 
 - Flags and permissions (read: 4, write: 2, execute: 1)
 - Game states (alive, invincible, frozen, etc.)
 - Feature toggles in software
 - Hardware registers and embedded programming
 
-### Bitwise Operations are Everywhere
+### Bitwise Operations
 
 - File permissions in Unix (rwx = 111 = 7)
 - Network masks and IP addresses
