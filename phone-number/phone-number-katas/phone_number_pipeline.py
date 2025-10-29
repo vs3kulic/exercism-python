@@ -39,9 +39,13 @@ class PhoneNumber:
     def _extract_digits(self, number: str) -> str:
         """Extract digits and handle leading '1'."""
         cleaned_number = "".join(char for char in number if char.isdigit())
-        if len(cleaned_number) == 11 and cleaned_number[0] == "1":
-            return cleaned_number[1:]  # Remove leading '1'
-        return cleaned_number
+
+        if len(cleaned_number) != 11:
+            return cleaned_number
+        if cleaned_number[0] != "1":
+            raise ValueError("11 digits must start with 1")
+
+        return cleaned_number[1:]  # Remove leading '1'
 
     # Validate the length of raw digits
     def _validate_length(self, cleaned_number: str) -> None:
@@ -49,7 +53,7 @@ class PhoneNumber:
         if len(cleaned_number) < MIN_LENGTH:
             raise ValueError(f"must not be fewer than {MIN_LENGTH} digits")
         if len(cleaned_number) > MAX_LENGTH:
-            raise ValueError(f"must not be greater than {MIN_LENGTH} digits")
+            raise ValueError(f"must not be greater than {MAX_LENGTH} digits")
 
     # Validate area and exchange codes
     def _validate_codes(self, cleaned_number: str) -> None:
