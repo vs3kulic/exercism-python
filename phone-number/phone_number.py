@@ -1,42 +1,73 @@
 """This module provides a PhoneNumber class for handling phone numbers."""
 
+WHITELIST = set("()+-. ")
+MIN_LENGTH = 10
+MAX_LENGTH = 11
+
 
 class PhoneNumber:
     """Class to represent and manipulate phone numbers."""
-    def __init__(self, raw_number):
+    def __init__(self, number):
         """Initialize the PhoneNumber instance with a number."""
-        self.raw_number = raw_number
-        self.cleaned_number = self.number # Placeholder for cleaned number (property)
+        self.number = self._process_number(number)
 
-    # Check for invalid characters
-    def _validate_characters(self):
-        """Find and raise errors for invalid characters in the phone number."""
-        pass
+    def _process_number(self, number: str) -> str:
+        """Process the raw number: validate, clean, and return the cleaned number.
+        
+        :param number: The raw phone number input
+        :type number: str
+        :returns: The cleaned phone number
+        :rtype: str
+        :raises ValueError: If the number is invalid according to specified rules
+        """
+        # Step 1: Validate characters and extract digits
+        digits = []
+        for char in number:
+            if char.isalpha():
+                raise ValueError("letters not permitted")
+            if not (char.isdigit() or char in WHITELIST):
+                raise ValueError("punctuations not permitted")
+            if char.isdigit():
+                digits.append(char)
 
-    # Clean the number
-    def _clean_number(self):
-        """Remove non-digit characters and handle leading '1'."""
-        pass
+        # Step 2: Validate length
+        if len(digits) < MIN_LENGTH:
+            raise ValueError("must not be fewer than 10 digits")
+        if len(digits) > MAX_LENGTH:
+            raise ValueError("must not be greater than 11 digits")
+        if len(digits) == MAX_LENGTH and digits[0] != "1":
+            raise ValueError("11 digits must start with 1")
 
-    # Validate the cleaned number
-    def _validate_number(self):
-        """Validate the cleaned phone number for length and code rules."""
-        pass
+        # Step 3: Clean the number
+        if len(digits) == MAX_LENGTH and digits[0] == "1":
+            digits = digits[1:]
+
+        # Step 4: Validate area and exchange codes
+        area_code = digits[:3]
+        exchange_code = digits[3:6]
+        if area_code[0] == "0":
+            raise ValueError("area code cannot start with zero")
+        if area_code[0] == "1":
+            raise ValueError("area code cannot start with one")
+        if exchange_code[0] == "0":
+            raise ValueError("exchange code cannot start with zero")
+        if exchange_code[0] == "1":
+            raise ValueError("exchange code cannot start with one")
+
+        # Return the cleaned number
+        return "".join(digits)
 
     @property
     def area_code(self):
         """Return the area code of the phone number."""
-        pass
-
-    @property
-    def number(self):
-        """Return the cleaned phone number as a string of digits."""
-        pass
+        return self.number[:3]
 
     def pretty(self):
         """Return the phone number in pretty format: (NXX) NXX-XXXX."""
-        pass
-
+        area_code = self.number[:3]
+        exchange_code = self.number[3:6]
+        subscriber_number = self.number[6:]
+        return f"({area_code})-{exchange_code}-{subscriber_number}"
 
 def main():
     """Main function to demonstrate the PhoneNumber class."""
