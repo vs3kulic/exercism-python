@@ -143,4 +143,3 @@ print(PhoneNumber.pretty(phone.number))  # Static method call
 
 ### Key Takeaway:
 The `pretty` method is an **instance method** because it depends on the instance attribute `_cleaned_number`. This design keeps the API clean and encapsulates the logic within the object.
-

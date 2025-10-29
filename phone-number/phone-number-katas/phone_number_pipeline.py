@@ -2,6 +2,8 @@
 CHAR_WHITELIST = frozenset("()+-. ") # whitelisted characters
 MIN_LENGTH = 10
 MAX_LENGTH = 11
+ACL = 3 # Area Code Length
+ECL = 3 # Exchange Code Length
 
 
 class PhoneNumber:
@@ -45,9 +47,9 @@ class PhoneNumber:
     def _validate_length(self, cleaned_number: str) -> None:
         """Validate the cleaned number for length."""
         if len(cleaned_number) < MIN_LENGTH:
-            raise ValueError("must not be fewer than 10 digits")
+            raise ValueError(f"must not be fewer than {MIN_LENGTH} digits")
         if len(cleaned_number) > MAX_LENGTH:
-            raise ValueError("must not be greater than 11 digits")
+            raise ValueError(f"must not be greater than {MIN_LENGTH} digits")
 
     # Validate area and exchange codes
     def _validate_codes(self, cleaned_number: str) -> None:
@@ -76,9 +78,9 @@ class PhoneNumber:
 
     def pretty(self) -> str:
         """Return the phone number in pretty format: (NXX) NXX-XXXX."""
-        area_code = self._cleaned_number[:3]
-        exchange_code = self._cleaned_number[3:6]
-        subscriber_number = self._cleaned_number[6:]
+        area_code = self._cleaned_number[:ACL]
+        exchange_code = self._cleaned_number[ACL:(ACL+ECL)]
+        subscriber_number = self._cleaned_number[(ACL+ECL):]
 
         return f"({area_code})-{exchange_code}-{subscriber_number}"
 
