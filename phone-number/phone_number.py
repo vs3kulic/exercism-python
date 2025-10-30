@@ -1,7 +1,9 @@
 """This module provides a PhoneNumber class for handling phone numbers."""
-CHAR_WHITELIST = frozenset("()+-. ") # whitelisted characters
+
+# Constants for phone number processing
+CHAR_WHITELIST = frozenset("()+-. ")
 MIN_LENGTH = 10
-MAX_LENGTH = 11
+MAX_LENGTH = 11 # including leading '1' if present
 ACL = 3 # Area Code Length
 ECL = 3 # Exchange Code Length
 
@@ -40,10 +42,10 @@ class PhoneNumber:
         """Extract digits and handle leading '1'."""
         cleaned_number = "".join(char for char in number if char.isdigit())
 
-        if len(cleaned_number) != 11:
+        if len(cleaned_number) != MAX_LENGTH:
             return cleaned_number
         if cleaned_number[0] != "1":
-            raise ValueError("11 digits must start with 1")
+            raise ValueError(f"{MAX_LENGTH} digits must start with 1")
 
         return cleaned_number[1:]  # Remove leading '1'
 
