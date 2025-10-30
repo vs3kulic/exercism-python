@@ -78,7 +78,7 @@ class PhoneNumber:
     @property
     def area_code(self) -> str:
         """Return the area code of the phone number."""
-        return self._cleaned_number[:3]
+        return self._cleaned_number[:ACL]
 
     def pretty(self) -> str:
         """Return the phone number in pretty format: (NXX) NXX-XXXX."""
