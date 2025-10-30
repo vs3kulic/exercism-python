@@ -58,8 +58,8 @@ class PhoneNumber:
     # Validate area and exchange codes
     def _validate_codes(self, cleaned_number: str) -> None:
         """Validate area code and exchange code rules."""
-        area_code = cleaned_number[:3]
-        exchange_code = cleaned_number[3:6]
+        area_code = cleaned_number[:ACL]
+        exchange_code = cleaned_number[ACL:(ECL+ACL)]
 
         if area_code[0] == "0":
             raise ValueError("area code cannot start with zero")
