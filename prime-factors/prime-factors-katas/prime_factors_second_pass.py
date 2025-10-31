@@ -1,27 +1,24 @@
 """This module provides the functionality to compute prime factors of a number."""
 
-def factors(number: int) -> list[int]:
+def factors(value: int) -> list[int]:
     """Return the prime factors of the given natural number.
-
-    :param number: The natural number to factor
-    :type number: int
+    :param value: The natural number to factor
+    :type value: int
     :returns: A list of prime factors
     :rtype: list[int]
     """
-    # Handle numbers less than 2 (smallest prime)
-    if number < 2:
+    if value < 2:
         return []
 
-    # Initialize starting divisor and list to hold prime factors
-    divisor = 2
     prime_factors = []
+    divisor = 2
 
-    # Perform prime factorization by trial division
-    while number >= 2:
-        while number % divisor == 0:
-            number //= divisor
+    while value > 1:
+        if value % divisor == 0:
+            value //= divisor
             prime_factors.append(divisor)
-        divisor += 1
+        else:
+            divisor += 1
 
     return prime_factors
 
