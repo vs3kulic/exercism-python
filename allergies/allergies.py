@@ -32,8 +32,9 @@ class Allergies:
     @property
     def lst(self) -> list[str]:
         """Get the list of allergies based on the score."""
-        return [allergy for allergy in ALLERGIES
-                if self.allergic_to(allergy)
+        return [
+            allergy for allergy in ALLERGIES
+            if self.allergic_to(allergy)
         ]
 
 def main():
