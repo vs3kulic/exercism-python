@@ -18,8 +18,7 @@ class Node:
         self.node_id = node_id
         self.children = []
 
-
-def _sort_records(records: list[Record]) -> list[Record]:
+def _sort_records(records: list[Record]) -> list[int]:
     """Sort records by their record_id.
     
     :param records: List of Record instances
@@ -28,8 +27,24 @@ def _sort_records(records: list[Record]) -> list[Record]:
     :rtype: list[Record]
     """
     # Sort Record instances by record_id
-    records.sort()
-    return records
+    # records.sort()
+    ordered_id = [record.record_id for record in sorted(records)]
+    return ordered_id
+
+def _validate_records(ordered_id: list[int]) -> None:
+    """Validate the integrity of the records.
+    
+    :param records: List of Record instances
+    :type records: list[Record]
+    :raises ValueError: If records do not form a valid tree structure
+    """
+    if ordered_id:
+        # First record must be root (record_id 0)
+        if ordered_id[0] != 0:
+            raise ValueError('invalid')
+        # Last record_id (zero-indexed) must match number of records to ensure continuity
+        if ordered_id[-1] != len(ordered_id) - 1:
+            raise ValueError('broken tree')
 
 def BuildTree(records: list[Record]) -> Node:
     """Build a tree from a list of Record instances.
@@ -39,22 +54,12 @@ def BuildTree(records: list[Record]) -> Node:
     :returns: The root Node of the constructed tree
     :rtype: None
     """
-    # Initialize root to None
+    # Initialize root (to None)
     root = None
 
-    # Sort Record instances by record_id
-    # Extract list of ordered records
-    records.sort(key=lambda x: x.record_id)
-    ordered_id = [i.record_id for i in records]
-    
-    # Validate the integrity of the records
-    if records:
-        # First record must be root (record_id 0)
-        if ordered_id[0] != 0:
-            raise ValueError('invalid')
-        # Last record_id (zero-indexed) must match number of records to ensure continuity
-        if ordered_id[-1] != len(ordered_id) - 1:
-            raise ValueError('broken tree')
+    # Sort and validate records
+    ordered_id = _sort_records(records)
+    _validate_records(records)
 
     # Initialize list to hold Node instances
     # Initialize parent mapping
