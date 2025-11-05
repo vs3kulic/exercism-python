@@ -40,3 +40,13 @@ for tree building katas."""
 #     Node(1)   Node(2)
 #     /    \       \
 # Node(3) Node(4) Node(5)
+
+# -------------------
+# PIPELINE APPROACH
+# -------------------
+# The BuildTree function can be broken down into several methods:
+# - _sort_records: Sorts the records by record_id.
+# - _validate_records: Validates the integrity of the records.
+# - _create_nodes: Creates Node instances for each record.
+# - _establish_relationships: Establishes parent-child relationships between nodes.
+# - BuildTree: Orchestrates the overall process by calling the above methods in sequence.

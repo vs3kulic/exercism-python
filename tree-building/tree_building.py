@@ -6,6 +6,10 @@ class Record:
     def __init__(self, record_id: int, parent_id: int) -> None:
         self.record_id = record_id
         self.parent_id = parent_id
+        
+    def __lt__(self, other: "Record") -> bool:
+        """Compare two Record instances based on their record_id."""
+        return self.record_id < other.record_id
 
 
 class Node:
@@ -14,6 +18,18 @@ class Node:
         self.node_id = node_id
         self.children = []
 
+
+def _sort_records(records: list[Record]) -> list[Record]:
+    """Sort records by their record_id.
+    
+    :param records: List of Record instances
+    :type records: list[Record]
+    :returns: Sorted list of Record instances
+    :rtype: list[Record]
+    """
+    # Sort Record instances by record_id
+    records.sort()
+    return records
 
 def BuildTree(records: list[Record]) -> Node:
     """Build a tree from a list of Record instances.
