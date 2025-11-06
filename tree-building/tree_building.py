@@ -6,7 +6,8 @@ class Record:
     def __init__(self, record_id: int, parent_id: int) -> None:
         self.record_id = record_id
         self.parent_id = parent_id
-        
+    
+    # Define less-than for sorting
     def __lt__(self, other: "Record") -> bool:
         """Compare two Record instances based on their record_id."""
         return self.record_id < other.record_id
@@ -18,91 +19,76 @@ class Node:
         self.node_id = node_id
         self.children = []
 
-def _sort_records(records: list[Record]) -> list[int]:
-    """Sort records by their record_id.
-    
-    :param records: List of Record instances
-    :type records: list[Record]
-    :returns: Sorted list of Record instances
-    :rtype: list[Record]
-    """
-    # Sort Record instances by record_id
-    # records.sort()
-    ordered_id = [record.record_id for record in sorted(records)]
-    return ordered_id
-
-def _validate_records(ordered_id: list[int]) -> None:
+def _validate_records(sorted_records: list[Record]) -> None:
     """Validate the integrity of the records.
     
-    :param records: List of Record instances
-    :type records: list[Record]
+    :param sorted_records: Sorted list of Record instances
+    :type sorted_records: list[Record]
     :raises ValueError: If records do not form a valid tree structure
     """
-    if ordered_id:
-        # First record must be root (record_id 0)
-        if ordered_id[0] != 0:
-            raise ValueError('invalid')
-        # Last record_id (zero-indexed) must match number of records to ensure continuity
-        if ordered_id[-1] != len(ordered_id) - 1:
-            raise ValueError('broken tree')
+    # First record must be root (record_id 0)
+    if sorted_records[0].record_id != 0:
+        raise ValueError("Record id is invalid or out of order.")
+    # Last record_id (zero-indexed) must match number of records to ensure continuity
+    if sorted_records[-1].record_id != len(sorted_records) - 1:
+        raise ValueError("Record id is invalid or out of order.")
 
-def BuildTree(records: list[Record]) -> Node:
-    """Build a tree from a list of Record instances.
+def _create_nodes(sorted_records: list[Record]) -> list[Node]:
+    """Create Node instances for each record.
+    
+    :param sorted_records: List of Record instances (already sorted by record_id)
+    :type sorted_records: list[Record]
+    :returns: List of Node instances
+    :rtype: list[Node]
+    """
+    nodes = [Node(record.record_id) for record in sorted_records]
+    return nodes
+
+def _establish_relationships(sorted_records: list[Record], nodes: list[Node]) -> None:
+    """Establish parent-child relationships between nodes.
+    
+    :param sorted_records: List of Record instances (already sorted by record_id)
+    :type sorted_records: list[Record]
+    :param nodes: List of Node instances
+    :type nodes: list[Node]
+    """
+    for record in sorted_records:
+        if record.record_id == 0:
+            continue  # Skip root node
+        parent_node = nodes[record.parent_id] # Get parent Node
+        child_node = nodes[record.record_id] # Get child Node
+        parent_node.children.append(child_node)
+
+def _validate_parent_child(sorted_records: list[Record]) -> None:
+    """Validate parent-child relationship rules.
+    
+    :param sorted_records: List of Record instances (already sorted by record_id)
+    :type sorted_records: list[Record]
+    :raises ValueError: If parent-child relationships are invalid
+    """
+    for record in sorted_records:
+        if record.record_id < record.parent_id:
+            raise ValueError("Node parent_id should be smaller than its record_id.")
+        if record.record_id == record.parent_id and record.record_id != 0:
+            raise ValueError("Only root should have equal record and parent id.")
+
+def BuildTree(records: list[Record]) -> (Node | None):
+    """Build a tree structure from a list of records.
     
     :param records: List of Record instances
     :type records: list[Record]
-    :returns: The root Node of the constructed tree
-    :rtype: None
+    :returns: Root node of the built tree
+    :rtype: Node (or None)
     """
-    # Initialize root (to None)
-    root = None
-
-    # Sort and validate records
-    ordered_id = _sort_records(records)
-    _validate_records(records)
-
-    # Initialize list to hold Node instances
-    # Initialize parent mapping
-    trees = []
-    parent = {}
+    # Handle empty input (specification)
+    if not records:
+        return None
     
-    # Add Node instances to trees list
-    for i in range(len(ordered_id)):
-        for j in records:
-            if ordered_id[i] == j.record_id:
-                # Validate parent-child relationships
-                if j.record_id == 0:
-                    if j.parent_id != 0:
-                        raise ValueError('error!')
-                # Validate that no record has a parent_id greater than its record_id
-                if j.record_id < j.parent_id:
-                    raise ValueError('something went wrong!')
-                # Validate that non-root records are not their own parents
-                if j.record_id == j.parent_id:
-                    if j.record_id != 0:
-                        raise ValueError('error!')
-                # Create Node and add to trees list
-                trees.append(Node(ordered_id[i]))
+    # Process records
+    sorted_records = sorted(records)
+    _validate_records(sorted_records)
+    _validate_parent_child(sorted_records)
+    nodes = _create_nodes(sorted_records)
+    _establish_relationships(sorted_records, nodes)
     
-    # Build the tree structure by linking parents and children
-    for i in range(len(ordered_id)):
-        # Find parent Node for current record
-        for j in trees:
-            if i == j.node_id:
-                parent = j
-        # Find and attach child Nodes to the parent Node
-        for j in records:
-            if j.parent_id == i:
-                for k in trees:
-                    # Skip the root node when attaching children
-                    if k.node_id == 0:
-                        continue
-                    # Attach child to parent
-                    if j.record_id == k.node_id:
-                        child = k
-                        parent.children.append(child)
-
-    # Set the root node and return
-    if len(trees) > 0:
-        root = trees[0]
-    return root
+    return nodes[0]
