@@ -59,10 +59,8 @@ def _establish_relationships(sorted_records: list[Record]) -> list[Node]:
     # Create all nodes
     nodes = [Node(record.record_id) for record in sorted_records]
 
-    # Establish parent-child relationships
-    for record in sorted_records:
-        if record.record_id == 0:
-            continue  # Skip root node
+    # Establish parent-child relationships, skipping the root
+    for record in sorted_records[1:]:
         parent_node = nodes[record.parent_id]  # Get parent Node
         child_node = nodes[record.record_id]  # Get child Node
         parent_node.children.append(child_node)
