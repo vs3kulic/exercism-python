@@ -31,31 +31,35 @@ def _validate_records(sorted_records: list[Record]) -> None:
     # First record must be root (record_id 0)
     if sorted_records[0].record_id != 0:
         raise ValueError("Record id is invalid or out of order.")
+
     # Last record_id (zero-indexed) must match number of records to ensure continuity
     if sorted_records[-1].record_id != len(sorted_records) - 1:
         raise ValueError("Record id is invalid or out of order.")
 
+    # Parent-child relationship rules
+    if any(record.record_id < record.parent_id for record in sorted_records):
+        raise ValueError("Node parent_id should be smaller than its record_id.")
 
-def _create_nodes(sorted_records: list[Record]) -> list[Node]:
-    """Create Node instances for each record.
-    
+    if any((record.record_id == record.parent_id and record.record_id != 0)
+           for record in sorted_records):
+        raise ValueError("Only root should have equal record and parent id.")
+
+
+def _establish_relationships(sorted_records: list[Record]) -> list[Node]:
+    """Create Node instances for each record and establish parent-child links.
+
+    This helper returns the created list of nodes so callers can access the
+    root. It combines node creation and linking into a single helper.
+
     :param sorted_records: List of Record instances (already sorted by record_id)
     :type sorted_records: list[Record]
-    :returns: List of Node instances
+    :returns: List of Node instances with children linked
     :rtype: list[Node]
     """
+    # Create all nodes
     nodes = [Node(record.record_id) for record in sorted_records]
-    return nodes
 
-
-def _establish_relationships(sorted_records: list[Record], nodes: list[Node]) -> None:
-    """Establish parent-child relationships between nodes.
-    
-    :param sorted_records: List of Record instances (already sorted by record_id)
-    :type sorted_records: list[Record]
-    :param nodes: List of Node instances
-    :type nodes: list[Node]
-    """
+    # Establish parent-child relationships
     for record in sorted_records:
         if record.record_id == 0:
             continue  # Skip root node
@@ -63,19 +67,7 @@ def _establish_relationships(sorted_records: list[Record], nodes: list[Node]) ->
         child_node = nodes[record.record_id]  # Get child Node
         parent_node.children.append(child_node)
 
-
-def _validate_parent_child(sorted_records: list[Record]) -> None:
-    """Validate parent-child relationship rules.
-    
-    :param sorted_records: List of Record instances (already sorted by record_id)
-    :type sorted_records: list[Record]
-    :raises ValueError: If parent-child relationships are invalid
-    """
-    for record in sorted_records:
-        if record.record_id < record.parent_id:
-            raise ValueError("Node parent_id should be smaller than its record_id.")
-        if record.record_id == record.parent_id and record.record_id != 0:
-            raise ValueError("Only root should have equal record and parent id.")
+    return nodes
 
 
 def BuildTree(records: list[Record]) -> Node | None:
@@ -89,12 +81,10 @@ def BuildTree(records: list[Record]) -> Node | None:
     # Handle empty input (specification)
     if not records:
         return None
-    
-    # Process records
+
+    # Sort and validate records, establish relationships
     sorted_records = sorted(records)
     _validate_records(sorted_records)
-    _validate_parent_child(sorted_records)
-    nodes = _create_nodes(sorted_records)
-    _establish_relationships(sorted_records, nodes)
-    
+    nodes = _establish_relationships(sorted_records)
+
     return nodes[0]
