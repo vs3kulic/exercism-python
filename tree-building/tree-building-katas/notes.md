@@ -44,3 +44,12 @@
 ## Summary
 - **PhoneNumber**: The class encapsulates all logic because it's tightly coupled to the phone number data.
 - **Tree Building**: The logic is separate because the `Record` and `Node` classes are just data containers, and the tree-building process is a distinct responsibility.
+
+## Notes about dataclasses
+
+# Design Decisions: Class Methods vs Standalone Functions
+...existing code...
+
+## Notes about dataclasses
+
+Dataclasses (stdlib, 3.7+) are a lightweight way to declare plain data holders. They reduce boilerplate and make intent explicit, keeping the focus on algorithmic logic. @dataclass auto-generates __init__, __repr__, and __eq__ (optionally ordering and hashing). Use field(default_factory=list) to avoid shared mutable defaults and __post_init__ for validation or derived fields. Prefer frozen=True for immutable records. Inspect metadata with dataclasses.fields() or the class attribute __dataclass_fields__ when building serializers or debug helpers. Avoid order=True when ordering semantics are unclear or fields are mutable; implement a custom __lt__ for single-key sorting. Use asdict()/astuple() for quick serialization. 

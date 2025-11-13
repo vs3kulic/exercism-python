@@ -1,9 +1,9 @@
 """This module contains a function to build a tree from a list of records."""
 from __future__ import annotations
-import dataclasses as dc
+from dataclasses import dataclass, field, fields, MISSING
 
 
-@dc.dataclass
+@dataclass
 class Record:
     """Class representing a record with an ID and a parent ID."""
     record_id: int
@@ -14,11 +14,11 @@ class Record:
         return self.record_id < other.record_id
 
 
-@dc.dataclass
+@dataclass
 class Node:
     """Class representing tree node with a node ID and children."""
     node_id: int
-    children: list[Node] = dc.field(default_factory=list)
+    children: list[Node] = field(default_factory=list)
 
 
 def _validate_records(sorted_records: list[Record]) -> None:
@@ -49,6 +49,9 @@ def _validate_records(sorted_records: list[Record]) -> None:
 
 def _establish_relationships(sorted_records: list[Record]) -> list[Node]:
     """Create Node instances for each record and establish parent-child links.
+
+    This helper returns the created list of nodes so callers can access the
+    root. It combines node creation and linking into a single helper.
 
     :param sorted_records: List of sorted Record instances
     :type sorted_records: list[Record]
@@ -85,3 +88,40 @@ def BuildTree(records: list[Record]) -> Node | None:
     nodes = _establish_relationships(sorted_records)
 
     return nodes[0]
+
+# ---------------------------------------------
+# Example usage and demonstration
+# ---------------------------------------------
+
+def main():
+    """Main function to demonstrate the BuildTree function."""
+    records = [
+        Record(0, 0),
+        Record(1, 0),
+        Record(2, 0),
+        Record(3, 1),
+        Record(4, 1),
+        Record(5, 2),
+        Record(6, 2),
+    ]
+    root = BuildTree(records)
+    print(f"Root Node ID: {root.node_id}")
+    for child in root.children:
+        print(f"  Child Node ID: {child.node_id}, \n"
+              f"    Children: {[c.node_id for c in child.children]}")
+
+if __name__ == "__main__":
+    main()
+
+# ---------------------------------------------
+# Additional utility for inspecting dataclasses
+# ---------------------------------------------
+
+    def inspect_dataclass(cls) -> None:
+        """Print field metadata for a dataclass `cls` (use dataclasses.fields)."""
+        print(f"Dataclass: {cls.__name__}")
+        for f in fields(cls):
+            default = f.default if f.default is not MISSING else None
+            df = f.default_factory if f.default_factory is not MISSING else None
+            df_name = getattr(df, "__name__", df) if df is not None else None
+            print(f"  {f.name}: type={f.type!r}, default={default!r}, default_factory={df_name!r}")
