@@ -8,5 +8,5 @@ def add(moment: datetime) -> datetime:
     :returns: A new datetime representing the moment 1 gigasecond later
     :rtype: datetime
     """
-    gigasecond = timedelta(seconds=1_000_000_000)
+    gigasecond = timedelta(seconds=1e9) # 1_000_000_000 seconds
     return moment + gigasecond
