@@ -1,3 +1,4 @@
+"""This module contains a function to add a gigasecond to a given datetime."""
 from datetime import datetime, timedelta
 
 def add(moment: datetime) -> datetime:
