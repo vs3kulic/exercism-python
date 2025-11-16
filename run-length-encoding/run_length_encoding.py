@@ -20,18 +20,25 @@ def encode(run: str) -> str:
     :returns: The run-length encoded string
     :rtype: str
     """
-    code = ""
-    return code
+    encoded = []
+    for i, char in enumerate(run):
+        count = 0
+        while i+1 < len(run):
+            if run[i] == run[i+1]:
+                count += 1
+                i += 1
+        encoded.append(f"{count}{char}")
+    return "".join(encoded)
 
 
 def main():
     """Main function to demonstrate encoding and decoding."""
     sample_run = "aaabbbccdaa"
     encoded = encode(sample_run)
-    decoded = decode(encoded)
+    # decoded = decode(encoded)
     print(f"Original: {sample_run}")
     print(f"Encoded: {encoded}")
-    print(f"Decoded: {decoded}")
+    # print(f"Decoded: {decoded}")
 
 if __name__ == "__main__":
     main()
