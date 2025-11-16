@@ -1,5 +1,6 @@
 """This module contains functions for run-length encoding and decoding of strings."""
 
+
 def decode(encoded_string: str) -> str:
     """Decode a run-length encoded string.
     
@@ -8,32 +9,41 @@ def decode(encoded_string: str) -> str:
     :returns: The decoded string
     :rtype: str
     """
-    run = ""
-    return run
+    decoded_string = ""
+    count_str = ""
+    for char in encoded_string:
+        if char.isdigit():
+            count_str += char
+        else:
+            count = int(count_str) if count_str else 1
+            decoded_string += char * count
+            count_str = ""
+    return decoded_string
 
 
-def encode(decoded_string: str) -> str:
-    """Encode a string using run-length encoding."""
-    if not decoded_string:
+def encode(string):
+    """
+    Encode a string using run-length encoding.
+    
+    :param string: The raw string input
+    :type string: str
+    :returns: The run-length encoded string
+    :rtype: str
+    """
+    if not string:
         return ""
 
-    encoded = []
-    i = 0
-    while i < len(decoded_string):
-        char = decoded_string[i]
-        count = 1
-        while (
-            i + 1 < len(decoded_string) and
-            decoded_string[i] == decoded_string[i+1]
-        ):
-            count += 1
-            i += 1
-        if count == 1:
-            encoded.append(char)
+    encoded_string = ""
+    count = 1
+    for i in range(1, len(string) + 1):
+        if i == len(string) or string[i] != string[i-1]:
+            if count > 1:
+                encoded_string += str(count)
+            encoded_string += string[i-1]
+            count = 1
         else:
-            encoded.append(f"{count}{char}")
-        i += 1
-    return "".join(encoded)
+            count += 1
+    return encoded_string
 
 
 def main():
